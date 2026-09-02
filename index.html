@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="theme-color" content="#f3f8fb">
-<title>Hệ thống thời khóa biểu · Aurora</title>
+<title>Hệ thống thời khóa biểu trường THPT Nguyễn Khuyến</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
@@ -1787,7 +1787,7 @@ body{
       </div>
       <div class="brand-copy">
         <span class="brand-eyebrow">SMART TIMETABLE</span>
-        <h1>HỆ THỐNG THỜI KHÓA BIỂU</h1>
+        <h1>HỆ THỐNG THỜI KHÓA BIỂU TRƯỜNG THPT NGUYỄN KHUYẾN</h1>
         <p>TRA CỨU NHANH · GIAO DIỆN ĐA THIẾT BỊ · DỮ LIỆU TRỰC TIẾP</p>
       </div>
     </div>
@@ -1863,7 +1863,7 @@ body{
             </button>
             <div class="export-menu" id="exportMenu">
               <button class="menu-item" id="excelBtn"><span class="menu-icon">XLS</span><span><b>Excel tổng hợp</b><small>Grid, chi tiết và danh sách học sinh</small></span></button>
-              <button class="menu-item" id="pdfBtn"><span class="menu-icon">PDF</span><span><b>PDF A4 đầy đủ</b><small>Dạng bảng biểu rõ ràng, dễ in</small></span></button>
+              <button class="menu-item" id="pdfBtn"><span class="menu-icon">PDF</span><span><b>PDF A4 nội dung</b><small>Bảng chữ tối giản · hàng và cột co theo nội dung</small></span></button>
               <button class="menu-item" id="pngBtn"><span class="menu-icon">PNG</span><span><b id="pngMenuTitle">PNG HÌNH NỀN</b><small id="pngMenuDesc">HỌC SINH: MÔN + PHÒNG · GIÁO VIÊN: MÔN + LỚP</small></span></button>
             </div>
           </div>
@@ -3012,8 +3012,8 @@ function setMobileLite(on){
 function updateExportLabels(){
   if(!els.pngMenuTitle||!els.pngMenuDesc)return;
   if(state.mode==='teacher'){
-    els.pngMenuTitle.textContent='PNG HÌNH NỀN · MÔN + LỚP';
-    els.pngMenuDesc.textContent='PHIÊN BẢN GIÁO VIÊN · CHỈ GIỮ MÔN HỌC VÀ LỚP / MÃ LỚP';
+    els.pngMenuTitle.textContent='PNG HÌNH NỀN · MÔN + LỚP + PHÒNG';
+    els.pngMenuDesc.textContent='PHIÊN BẢN GIÁO VIÊN · MÔN HỌC, LỚP / MÃ LỚP VÀ PHÒNG';
   }else if(state.mode==='student'){
     els.pngMenuTitle.textContent='PNG HÌNH NỀN · MÔN + PHÒNG';
     els.pngMenuDesc.textContent='PHIÊN BẢN HỌC SINH · CHỈ GIỮ MÔN HỌC VÀ PHÒNG';
@@ -3363,7 +3363,16 @@ function printDensity(m,periods){
   return max>=6||total>=45?'ultra':max>=3||total>=28?'dense':'normal'
 }
 function printGridTable(title,m,periods,identity,sub){
-  const density=printDensity(m,periods);const rows=periods.map(p=>`<tr><th class="period-cell">Tiết ${p}</th>${DAYS.map(d=>`<td>${(m[key(d,p)]||[]).map(x=>{const l=x.lesson,pal=subjectPalette(l.subject||l.code);return`<div class="pl" style="--pa:${pal.accent};--pb:${pal.border};--psf:${pal.soft};--pi:${pal.ink};--pp:${pal.pill}"><div class="ps">${esc(l.subject||'Chưa có môn')}</div>${l.code?`<div class="pc">${l.source==='home'?'Lớp ':'Mã · '}${esc(l.code)}</div>`:''}${l.teacher?`<div class="pm"><b>GV</b> ${esc(l.teacher)}</div>`:''}${l.room?`<div class="pm"><b>Phòng</b> ${esc(l.room)}</div>`:''}${l.comments?`<div class="pm"><b>Ghi chú</b> ${esc(l.comments)}</div>`:''}${x.count?`<div class="pn">${x.count} học sinh</div>`:''}</div>`}).join('')||'<div class="dash">—</div>'}</td>`).join('')}</tr>`).join('');return`<section class="print-session ${density}"><table class="t"><thead><tr class="session-row"><th colspan="6"><div class="session-top"><div><div class="doc-title">${esc(identity)}</div><div class="doc-sub">${esc(sub)}</div></div><div class="session-name">${esc(title)}</div></div></th></tr><tr><th>Tiết</th>${DAYS.map(d=>`<th>Thứ ${d}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></section>`
+  const rows=periods.map(p=>`<tr><th class="period-cell">TIẾT ${p}</th>${DAYS.map(d=>`<td>${(m[key(d,p)]||[]).map(x=>{
+    const l=x.lesson,details=[];
+    if(l.code)details.push(`<div class="pd"><b>${l.source==='home'?'LỚP':'MÃ LỚP'}:</b> ${esc(l.code)}</div>`);
+    if(l.teacher)details.push(`<div class="pd"><b>GIÁO VIÊN:</b> ${esc(l.teacher)}</div>`);
+    details.push(`<div class="pd"><b>PHÒNG:</b> ${esc(l.room||'CHƯA CÓ PHÒNG')}</div>`);
+    if(l.comments)details.push(`<div class="pd"><b>GHI CHÚ:</b> ${esc(l.comments)}</div>`);
+    if(x.count)details.push(`<div class="pd"><b>SỐ HỌC SINH:</b> ${x.count}</div>`);
+    return`<div class="pl"><div class="ps">${esc(l.subject||'CHƯA CÓ MÔN')}</div>${details.join('')}</div>`
+  }).join('')||'<div class="dash">—</div>'}</td>`).join('')}</tr>`).join('');
+  return`<section class="print-session"><table class="t"><thead><tr class="session-row"><th colspan="6"><div class="session-top"><div class="doc-title">${esc(identity)}</div><div class="doc-sub">${esc(sub)}</div><div class="session-name">${esc(title)}</div></div></th></tr><tr><th>TIẾT</th>${DAYS.map(d=>`<th>THỨ ${d}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></section>`
 }
 function printableHtml(v){
   const fileTitle=pdfSuggestedName(v),periods=v.primaryPeriods||HOME_PERIODS;
@@ -3379,47 +3388,39 @@ function printableHtml(v){
 
   return`<!doctype html><html><head><meta charset="utf-8"><title>${esc(fileTitle)}</title><style>
   @page{size:A4 portrait;margin:5mm}
-  *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  *{box-sizing:border-box}
   html,body{margin:0;padding:0;width:100%}
-  body{font-family:"Segoe UI","Noto Sans",Arial,sans-serif;color:#152238;background:#fff;font-size:8pt}
-  .print-session{break-after:page;page-break-after:always}
-  .print-session:last-of-type{break-after:page}
-  table{border-collapse:collapse;width:100%}
-  table.t{table-layout:fixed;min-height:286mm;border:1px solid #ccd5e1}
+  body{font-family:"Segoe UI","Noto Sans",Arial,sans-serif;color:#000;background:#fff;font-size:7.4pt}
+  .print-session{margin:0 0 4mm;break-after:auto;page-break-after:auto}
+  table{border-collapse:collapse}
+  table.t{width:100%;table-layout:auto;border:.25mm solid #333}
   table.t thead{display:table-header-group}
-  table.t tbody{height:100%}
-  table.t tbody tr{height:20%;break-inside:avoid;page-break-inside:avoid}
-  table.t th,table.t td{border:1px solid #ccd5e1;vertical-align:top}
-  table.t thead tr:last-child th{height:8mm;padding:1.8mm 1mm;background:#eff3f8;text-align:center;font-size:7.6pt;color:#46556d}
-  table.t thead tr:last-child th:first-child{width:11mm}
-  .session-row th{padding:0;border:1px solid #c8d2df;background:#fff}
-  .session-top{min-height:18mm;padding:3.2mm 3.5mm;display:flex;align-items:center;justify-content:space-between;gap:5mm;background:linear-gradient(135deg,#f8faff,#f2f5ff)}
-  .doc-title{font-size:13pt;font-weight:800;line-height:1.08;letter-spacing:-.2pt;color:#16233a}
-  .doc-sub{margin-top:1.2mm;color:#68758a;font-size:7.2pt}
-  .session-name{flex:none;font-size:11pt;font-weight:900;color:#4e61cf;background:#e9edff;border:1px solid #dbe2ff;border-radius:3mm;padding:2mm 3mm}
-  .period-cell{width:11mm;text-align:center;vertical-align:middle!important;background:#f7f9fc;color:#526078;font-size:7.8pt;padding:1.1mm}
-  table.t td{padding:1.6mm 1.35mm;background:#fff}
-  .pl{border-left:1.1mm solid var(--pa);background:var(--psf);border-radius:1.4mm;padding:1.25mm 1.4mm;margin:0 0 1.2mm}
-  .pl:last-child{margin-bottom:0}
-  .ps{font-size:9.2pt;line-height:1.12;font-weight:900;color:var(--pi)}
-  .pc{display:inline-block;margin:.9mm 0 .8mm;padding:.55mm 1.1mm;border-radius:1.5mm;background:var(--pp);color:var(--pi);border:.25mm solid var(--pb);font-size:6.7pt;font-weight:800}
-  .pm{font-size:7pt;line-height:1.24;color:#55647a;overflow-wrap:anywhere}
-  .pm b{font-size:5.7pt;text-transform:uppercase;color:#8792a3}
-  .pn{display:inline-block;margin-top:.8mm;font-size:5.9pt;font-weight:700;color:#6d7890}
-  .dash{height:100%;display:grid;place-items:center;color:#b0b8c4}
-  .dense .pl{padding:1mm 1.1mm;margin-bottom:.8mm}.dense .ps{font-size:7.7pt}.dense .pc{font-size:5.9pt}.dense .pm{font-size:5.9pt}
-  .ultra table.t{min-height:0}.ultra table.t tbody tr{height:auto;break-inside:auto;page-break-inside:auto}.ultra table.t td{padding:1mm}
-  .ultra .pl{padding:.8mm 1mm;margin-bottom:.6mm}.ultra .ps{font-size:6.8pt}.ultra .pc{font-size:5.2pt;margin:.5mm 0}.ultra .pm{font-size:5.25pt;line-height:1.15}.ultra .pn{font-size:5pt}
-  .roster-section{break-before:page;page-break-before:always}
-  .roster-print-head{display:flex;align-items:flex-end;justify-content:space-between;gap:5mm;margin:1mm 0 4mm;padding:0 1mm}
-  .roster-print-head h2{margin:0;font-size:14pt}.roster-print-head p{margin:1mm 0 0;color:#68758a;font-size:8pt}
-  .roster-print-head>div:last-child{font-size:7pt;color:#7a8698}
-  table.r{font-size:8pt}
+  table.t tbody tr{height:auto;break-inside:avoid;page-break-inside:avoid}
+  table.t th,table.t td{border:.2mm solid #555;vertical-align:top;padding:1mm 1.1mm}
+  table.t thead tr:last-child th{text-align:center;font-size:7.2pt}
+  table.t thead tr:last-child th:first-child{width:10mm}
+  .session-row th{padding:0;text-align:left}
+  .session-top{padding:1.5mm 1.8mm;line-height:1.25}
+  .doc-title{font-size:10.5pt;font-weight:800}
+  .doc-sub{margin-top:.6mm;font-size:6.6pt;font-weight:400}
+  .session-name{margin-top:1mm;font-size:8.5pt;font-weight:800}
+  .period-cell{width:10mm;text-align:center;vertical-align:middle!important;font-size:7pt;white-space:nowrap}
+  .pl{padding:0;margin:0;line-height:1.2;overflow-wrap:anywhere}
+  .pl+.pl{border-top:.2mm solid #777;margin-top:1mm;padding-top:1mm}
+  .ps{font-size:8pt;font-weight:800}
+  .pd{margin-top:.45mm;font-size:6.5pt;font-weight:400}
+  .pd b{font-size:6pt}
+  .dash{text-align:center;color:#555}
+  .roster-section{margin-top:4mm;break-before:auto;page-break-before:auto}
+  .roster-print-head{display:flex;align-items:flex-end;justify-content:space-between;gap:5mm;margin:0 0 2mm}
+  .roster-print-head h2{margin:0;font-size:10pt}.roster-print-head p{margin:.6mm 0 0;font-size:7pt}
+  .roster-print-head>div:last-child{font-size:6.5pt}
+  table.r{width:auto;max-width:100%;font-size:7pt}
   .r thead{display:table-header-group}.r tr{break-inside:avoid;page-break-inside:avoid}
-  .r th,.r td{border:1px solid #d5dce6;padding:2mm 2.2mm}
-  .r th{background:#f1f4f8;color:#536178;font-size:7pt;text-transform:uppercase}
-  .r th:nth-child(1),.r td:nth-child(1){width:12mm;text-align:center}
-  .r th:nth-child(3),.r td:nth-child(3){width:25mm}
+  .r th,.r td{border:.2mm solid #555;padding:1mm 1.4mm}
+  .r th{font-size:6.5pt;text-transform:uppercase}
+  .r th:nth-child(1),.r td:nth-child(1){width:10mm;text-align:center}
+  .r th:nth-child(3),.r td:nth-child(3){white-space:nowrap}
   </style></head><body>${schedules}${roster}<script>
   window.onload=()=>{document.title=${JSON.stringify(fileTitle)};window.focus();setTimeout(()=>window.print(),260)}
   <\/script></body></html>`
@@ -3662,17 +3663,18 @@ function wrapLines(ctx,text,maxW,maxLines=99){
   return lines
 }
 function drawLines(ctx,lines,x,y,lineH){lines.forEach((line,i)=>ctx.fillText(line,x,y+i*lineH));return lines.length*lineH}
-function canvasSessionMetrics(m,periods,scale=1){
-  const itemH=126*scale,rowPad=22*scale,headH=68*scale,titleH=70*scale;
+function canvasSessionMetrics(m,periods,scale=1,variant=null){
+  const itemH=(variant?.tertiary?184:126)*scale,rowPad=22*scale,headH=68*scale,titleH=70*scale;
   const rows=periods.map(p=>{let maxItems=1;for(const d of DAYS)maxItems=Math.max(maxItems,(m[key(d,p)]||[]).length||1);return Math.max(128*scale,rowPad+maxItems*itemH)});
   return{itemH,rowPad,headH,titleH,rows,total:titleH+headH+rows.reduce((a,b)=>a+b,0)}
 }
 function pngVariant(){
   if(state.mode==='teacher'){
     return{
-      caption:'MÔN HỌC · LỚP',
-      fileSuffix:'Mon_Lop',
-      secondary:(l)=>clean(l.code||l.homeClass)||'CHƯA CÓ LỚP'
+      caption:'MÔN HỌC · LỚP · PHÒNG',
+      fileSuffix:'Mon_Lop_Phong',
+      secondary:(l)=>clean(l.code||l.homeClass)||'CHƯA CÓ LỚP',
+      tertiary:(l)=>clean(l.room)||'CHƯA CÓ PHÒNG'
     }
   }
   return{
@@ -3700,7 +3702,13 @@ function pngColumnLayout(ctx,m,variant,scale=1){
         const secondary=variant.secondary(l);
         const secondaryW=Math.min(ctx.measureText(secondary).width+padX*2+10*scale,210*scale);
 
-        maxW=Math.max(maxW,subjectW,secondaryW)
+        let tertiaryW=0;
+        if(variant.tertiary){
+          ctx.font=`900 ${19*scale}px "Segoe UI",Arial,sans-serif`;
+          tertiaryW=Math.min(ctx.measureText(variant.tertiary(l)).width+padX*2+10*scale,210*scale)
+        }
+
+        maxW=Math.max(maxW,subjectW,secondaryW,tertiaryW)
       }
     }
 
@@ -3710,12 +3718,12 @@ function pngColumnLayout(ctx,m,variant,scale=1){
   const totalW=labelW+cols.reduce((a,b)=>a+b,0)+gap*(DAYS.length-1);
   return{labelW,gap,cols,totalW}
 }
-function pngSessionHeight(m,periods,scale=1){
-  const mt=canvasSessionMetrics(m,periods,scale);
+function pngSessionHeight(m,periods,scale=1,variant=null){
+  const mt=canvasSessionMetrics(m,periods,scale,variant);
   return 92*scale + mt.rows.reduce((a,b)=>a+b,0)
 }
 function drawPosterSession(ctx,m,periods,x,y,layout,title,variant,scale=1){
-  const mt=canvasSessionMetrics(m,periods,scale),labelW=layout.labelW,gap=layout.gap,cols=layout.cols,totalW=layout.totalW;
+  const mt=canvasSessionMetrics(m,periods,scale,variant),labelW=layout.labelW,gap=layout.gap,cols=layout.cols,totalW=layout.totalW;
 
   ctx.textAlign='left';
   ctx.fillStyle='#18243b';
@@ -3779,14 +3787,23 @@ function drawPosterSession(ctx,m,periods,x,y,layout,title,variant,scale=1){
         ctx.textAlign='left';
         ctx.fillStyle=pal.ink;
         ctx.font=`900 ${26*scale}px "Segoe UI",Arial,sans-serif`;
-        const subjectLines=wrapLines(ctx,l.subject||'CHƯA CÓ MÔN',maxText,3);
+        const subjectLines=wrapLines(ctx,l.subject||'CHƯA CÓ MÔN',maxText,variant.tertiary?2:3);
         let ty=cy+29*scale;
         ty+=drawLines(ctx,subjectLines,tx,ty,26*scale);
 
         ctx.fillStyle='#58657a';
         ctx.font=`900 ${21*scale}px "Segoe UI",Arial,sans-serif`;
         const secondLines=wrapLines(ctx,variant.secondary(l),maxText,2);
-        drawLines(ctx,secondLines,tx,Math.max(ty+10*scale,cy+boxH-28*scale),22*scale);
+        if(variant.tertiary){
+          const secondY=ty+7*scale;
+          ty=secondY+drawLines(ctx,secondLines,tx,secondY,22*scale);
+          ctx.fillStyle='#758196';
+          ctx.font=`850 ${19*scale}px "Segoe UI",Arial,sans-serif`;
+          const thirdLines=wrapLines(ctx,variant.tertiary(l),maxText,2);
+          drawLines(ctx,thirdLines,tx,ty+7*scale,20*scale)
+        }else{
+          drawLines(ctx,secondLines,tx,Math.max(ty+10*scale,cy+boxH-28*scale),22*scale)
+        }
 
         cy+=mt.itemH;
       }
@@ -3825,8 +3842,8 @@ function exportPng(){
   const naturalTableW=Math.max(naturalMorning.totalW,naturalAfternoon?.totalW||0);
 
   const naturalTitleH=128;
-  const naturalMorningH=pngSessionHeight(v.m,periods,1);
-  const naturalAfternoonH=afternoon?pngSessionHeight(afternoon.m,afternoon.periods,1):0;
+  const naturalMorningH=pngSessionHeight(v.m,periods,1,variant);
+  const naturalAfternoonH=afternoon?pngSessionHeight(afternoon.m,afternoon.periods,1,variant):0;
   const naturalGap=afternoon?30:0;
   const naturalFooterH=44;
   const naturalContentH=naturalTitleH+naturalMorningH+naturalGap+naturalAfternoonH+naturalFooterH;
@@ -3846,8 +3863,8 @@ function exportPng(){
   const tableW=Math.max(morningLayout.totalW,afternoonLayout?.totalW||0);
 
   const titleH=128*scale;
-  const morningH=pngSessionHeight(v.m,periods,scale);
-  const afternoonH=afternoon?pngSessionHeight(afternoon.m,afternoon.periods,scale):0;
+  const morningH=pngSessionHeight(v.m,periods,scale,variant);
+  const afternoonH=afternoon?pngSessionHeight(afternoon.m,afternoon.periods,scale,variant):0;
   const gap=afternoon?30*scale:0;
   const footerH=44*scale;
   const contentH=titleH+morningH+gap+afternoonH+footerH;
@@ -3918,7 +3935,7 @@ function exportPng(){
   a.click();
 
   action(state.mode==='teacher'
-    ?'Đã xuất hình nền 9:20 · Môn + Lớp'
+    ?'Đã xuất hình nền 9:20 · Môn + Lớp + Phòng'
     :'Đã xuất hình nền 9:20 · Môn + Phòng')
 }
 let scheduleDrag=null;
