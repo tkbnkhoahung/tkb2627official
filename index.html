@@ -3,8 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover,interactive-widget=resizes-content">
-<meta name="theme-color" content="#f3f8fb">
-<title>Hệ thống thời khóa biểu trường THPT Nguyễn Khuyến 2026-2027· Aurora</title>
+<meta name="theme-color" content="#b62035">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Nguyễn Khuyến · Lịch học</title>
+<meta name="description" content="Tra cứu lịch học, lịch dạy và phòng học Trường THPT Nguyễn Khuyến.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
@@ -1774,8 +1778,76 @@ body{
 }
 </style>
 
+<style>
+:root{--bg:#faf8f7;--text:#30272b;--muted:#718288;--line:#e3e9e9;--brand:#b62035;--brand-soft:#fff0f1;--shadow:0 5px 22px #183d3510;--shadow-sm:0 3px 12px #183d3508}
+html body{background:#faf8f7!important;color:#30272b;font-family:'Segoe UI',Arial,sans-serif}
+body:before,body:after{display:none!important}
+.app{width:auto!important;max-width:1500px!important;margin:0 0 0 246px!important;padding:30px 38px!important}
+.nk-sidebar{position:fixed;inset:0 auto 0 0;width:246px;background:#fff;border-right:1px solid #e5ebea;padding:34px 20px;display:flex;flex-direction:column;z-index:60}
+.nk-brand{display:flex;align-items:center;gap:12px;padding:0 10px 35px}.nk-mark{display:grid;place-items:center;width:42px;height:44px;border-radius:13px;background:#b62035;color:white;font-weight:800;letter-spacing:-1px}.nk-brand b{display:block;font-size:17px;letter-spacing:-.5px}.nk-brand small{font-size:11px;color:#8a999a;display:block;margin-top:4px;letter-spacing:1px}
+.nk-nav-label{font-size:10px;letter-spacing:1.6px;color:#8a969a;padding:0 14px 16px;font-weight:700}
+.nk-sidebar .aurora-mode-row{display:block!important;border:0!important;margin:0!important;padding:0!important;background:none!important}.nk-sidebar .command-title{display:none!important}
+.nk-sidebar .segmented{display:flex!important;flex-direction:column;gap:7px;width:100%!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;overflow:visible}
+.nk-sidebar .seg{display:flex!important;align-items:center;gap:12px;text-align:left;width:100%;min-height:48px!important;padding:13px 16px!important;border:0!important;border-radius:10px!important;background:none!important;color:#6f8084!important;box-shadow:none!important;font-size:13px!important;font-weight:600!important;text-transform:none!important;white-space:nowrap}
+.nk-sidebar .seg:before{content:attr(data-symbol);font-size:18px;width:23px;color:inherit}.nk-sidebar .seg.active{background:#fff0f1!important;color:#b62035!important}.nk-sidebar .seg:hover{background:#f3f7f5!important;transform:none!important}
+.nk-sidebar-foot{margin-top:auto;padding:22px 12px 0;border-top:1px solid #edf0ef;color:#899693;font-size:11px;line-height:1.8}.nk-sidebar-foot strong{display:block;color:#526b65;font-weight:600}
+.topbar{background:none!important;border:0!important;box-shadow:none!important;padding:0 0 24px!important;margin:0!important;border-radius:0!important;min-height:0!important}.topbar:before,.topbar:after{display:none!important}.topbar .logo{display:none}.brand h1{font-size:22px!important;letter-spacing:-.65px!important;color:#233e40!important;text-transform:none!important}.brand p{font-size:12px!important;letter-spacing:0!important;text-transform:none!important;color:#82918f!important;margin-top:7px!important}.live-chip{background:#fff!important;border:1px solid #e1e9e5!important;border-radius:22px!important;font-size:10px!important;box-shadow:none!important;max-width:260px}.icon-btn{border-radius:50%!important;box-shadow:none!important}
+.aurora-command{display:block!important;padding:20px 22px!important;border:1px solid #e4eae7!important;border-radius:16px!important;background:#fff!important;box-shadow:none!important;margin-bottom:24px!important;overflow:visible!important}.aurora-command:before,.aurora-command:after{display:none!important}.aurora-tool-grid{display:flex!important;flex-wrap:wrap;gap:20px!important;align-items:center!important}.aurora-panel{padding:0!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;min-width:0}.search-panel{flex:1 1 330px!important}.panel-label{margin-bottom:8px!important}.panel-label b{font-size:10px!important;letter-spacing:1px!important;color:#718682!important}.panel-label small{display:none!important}.searchbox{border:1px solid #e1e9e6!important;background:#f8faf9!important;border-radius:10px!important;min-height:46px!important;box-shadow:none!important}.searchbox input{font-size:13px!important;font-weight:500!important}.search-icon-bubble{background:transparent!important;box-shadow:none!important;color:#ad2036!important}.searchbox:focus-within{border-color:#c72a42!important;box-shadow:0 0 0 3px #b6203512!important}.detail-switch{box-shadow:none!important;background:#f5f7f6!important;border:1px solid #e6ebe8!important;border-radius:9px!important}.detail-btn.active{background:#fff!important;color:#b62035!important}.export-btn,.bulk-btn{background:#b62035!important;border:0!important;border-radius:9px!important;box-shadow:none!important;min-height:40px!important;font-size:11px!important}.bulk-btn{background:#fff0f1!important;color:#b62035!important}.export-btn:disabled,.bulk-btn:disabled{opacity:.45!important}.view-tools{margin-top:8px!important}.zoom-btn,.mobile-lite-btn{border-radius:6px!important;font-size:10px!important}.export-menu,.bulk-menu{border:1px solid #e1e9e5!important;border-radius:12px!important;box-shadow:0 16px 45px #173d3520!important}
+.search-empty-state{position:relative!important;display:block;padding:0!important;min-height:0!important;border:1px solid #e1e8e3!important;border-radius:20px!important;background:#fff0ee!important;box-shadow:none!important;overflow:hidden!important;margin:0!important}.search-empty-state.hidden{display:none!important}.search-empty-state:before,.search-empty-state:after{display:none!important}
+.nk-hero{display:grid;grid-template-columns:1.2fr 1fr;min-height:330px;align-items:center;padding:42px 45px;gap:35px}.nk-eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:10px;font-weight:700;letter-spacing:1.5px;color:#ad2036}.nk-eyebrow:before{content:'';width:6px;height:6px;background:#e55166;border-radius:50%}.nk-hero h2{font-size:36px!important;line-height:1.2!important;font-weight:600!important;letter-spacing:-1.5px!important;color:#702033!important;text-align:left!important;text-transform:none!important;margin:18px 0!important;max-width:420px}.nk-hero p{font-size:13px!important;line-height:1.9!important;color:#76867e!important;text-align:left!important;max-width:380px!important;margin:0!important;text-transform:none!important;letter-spacing:0!important}.nk-hero-hint{display:flex;align-items:center;gap:9px;font-size:11px;color:#82988e;margin-top:26px}.nk-hero-hint kbd{background:#fff;border:1px solid #d9e5dd;border-radius:5px;padding:4px 7px;font:11px inherit}
+.nk-art{position:relative;height:230px;transform:rotate(-5deg);border:1px solid #dae5dd;border-radius:15px;background:#fff;box-shadow:12px 18px 0 #f7d5d8;padding:20px}.nk-art-top{display:flex;justify-content:space-between;font-size:10px;color:#6f8879;padding-bottom:20px}.nk-art-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.nk-art-grid i{height:39px;border-radius:5px;background:#f1f5ef}.nk-art-grid i:nth-child(3n){background:#f8c8cd}.nk-art-grid i:nth-child(4n){background:#f3e9ce}.nk-art-grid i:nth-child(7n){background:#e2eaf0}.nk-art-badge{position:absolute;right:-15px;bottom:-16px;border:1px solid #e4e9df;background:#fffdf8;border-radius:12px;padding:12px 19px;transform:rotate(5deg);font-size:11px;color:#67826c;box-shadow:0 6px 16px #254d4210}.nk-art-badge b{color:#285643;font-size:15px;margin-right:6px}
+.nk-guides{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:22px}.nk-guide{border:1px solid #e4e9e7;background:#fff;border-radius:13px;padding:20px;display:flex;gap:14px;text-align:left;cursor:pointer;color:#602b36;font:inherit}.nk-guide:hover{border-color:#91b5a7;transform:translateY(-2px);transition:.2s}.nk-guide>span{background:#f0f6f2;border-radius:9px;width:35px;height:35px;display:grid;place-items:center;flex-shrink:0;font-size:18px}.nk-guide b{font-size:12px;display:block;margin:1px 0 8px}.nk-guide small{font-size:11px;color:#89968e;line-height:1.6;display:block}.search-empty-state.hidden+.nk-guides{display:none}
+.view-head{padding:16px 0!important;background:none!important;border:0!important;box-shadow:none!important}.view-title h2{color:#702033!important;font-size:24px!important}.mode-badge{background:#fff0f1!important;color:#ad2036!important;border:0!important}.section-bar h3{font-size:14px!important;color:#702033!important}.schedule-shell{border:1px solid #e0e8e3!important;border-radius:14px!important;box-shadow:none!important;background:#fff!important}.ghead{background:#fff3f2!important;color:#87545b!important}.period{background:#fafcf9!important;color:#7c9083!important}.slot{background:#fff!important}.slot.blank{background:#fcfdfb!important}.lesson{border-radius:8px!important;box-shadow:none!important}.welcome-strip{background:#ebf3ed!important;border:1px solid #dce9df!important;border-radius:12px!important;box-shadow:none!important}.stat,.roster-card,.free-room-panel{box-shadow:none!important;border:1px solid #e3eae6!important;border-radius:13px!important}.stat-value{color:#b62035!important}.footer{margin-top:25px!important;font-size:10px!important;color:#94a29a!important}.action-line{border-radius:8px!important}
+@media(min-width:1800px){.app{margin-left:270px!important}.nk-sidebar{width:270px}}
+@media(max-width:1100px){.app{margin-left:210px!important;padding:25px!important}.nk-sidebar{width:210px;padding:28px 14px}.nk-brand{padding-left:4px}.nk-brand b{font-size:15px}.nk-hero{padding:30px;gap:20px}.nk-hero h2{font-size:29px!important}.nk-art{height:210px}.nk-art-grid i{height:32px}.nk-guides{gap:10px}.nk-guide{padding:14px}.live-chip{max-width:210px}}
+@media(max-width:800px){.app{margin:0!important;padding:20px 16px!important}.nk-sidebar{position:relative;width:100%;padding:18px 16px 12px;border-right:0;border-bottom:1px solid #e1e8e4}.nk-brand{padding:0 0 18px}.nk-sidebar-foot,.nk-nav-label{display:none}.nk-sidebar .segmented{flex-direction:row!important;overflow-x:auto!important;gap:6px!important}.nk-sidebar .seg{width:auto!important;min-height:40px!important;padding:9px 13px!important;flex:none}.nk-sidebar .seg:before{font-size:16px;width:auto}.topbar{padding-bottom:20px!important;flex-wrap:wrap}.brand h1{font-size:20px!important}.brand p{display:block!important;font-size:11px!important}.live-chip{max-width:75vw}.nk-hero{min-height:300px}.nk-hero h2{font-size:28px!important}.nk-art{height:195px;padding:14px}.nk-art-grid i{height:30px}.nk-guides{grid-template-columns:1fr 1fr 1fr}.nk-guide{display:block}.nk-guide>span{margin-bottom:12px}.aurora-tool-grid{gap:14px!important}.search-panel{flex-basis:100%!important}}
+@media(max-width:520px){.nk-hero{display:block;padding:28px;min-height:0}.nk-hero h2{font-size:29px!important;max-width:100%!important}.nk-art{display:none}.nk-guides{grid-template-columns:1fr;gap:10px}.nk-guide{display:flex;padding:15px 18px}.nk-guide>span{margin-bottom:0}.nk-guide b{margin-bottom:4px}.aurora-command{padding:16px!important}.topbar .live-wrap{width:100%;margin-top:3px}.live-chip{max-width:calc(100% - 45px)}.nk-hero-hint{display:none}.panel-label{margin-bottom:6px!important}.footer{display:block!important;line-height:1.8}.footer span{display:block}}
+@media print{.nk-sidebar,.nk-guides{display:none!important}.app{margin:0!important;padding:0!important}}
+
+/* Crimson edition: horizontal workspace, editorial hero, compact calendar. */
+:root{--brand:#b62035;--brand-soft:#fff0f1;--text:#30272b;--muted:#8c7c80;--line:#eee3e4}
+html body,button,input,select{font-family:'Google Sans','Be Vietnam Pro',Arial,sans-serif!important}
+html body{background:#faf8f7!important}
+.nk-sidebar{position:relative!important;inset:auto!important;width:100%!important;padding:24px max(32px,calc((100vw - 1400px)/2)) 0!important;display:block!important;border:0;border-bottom:1px solid #eddddf;background:#fff!important}
+.nk-brand{padding:0 0 23px!important;gap:13px}.nk-mark{background:#b62035!important;border-radius:14px;font-size:19px;width:46px;height:46px;box-shadow:0 5px 14px #b6203520}.nk-brand b{font-size:22px;color:#572332}.nk-brand small{color:#a1858a;letter-spacing:1.4px;font-size:9px}.nk-nav-label,.nk-sidebar-foot{display:none!important}
+.nk-sidebar .segmented{flex-direction:row!important;gap:18px!important;overflow-x:auto!important}.nk-sidebar .seg{width:auto!important;border-radius:0!important;min-height:50px!important;padding:13px 16px!important;border-bottom:3px solid transparent!important;color:#8d747c!important;font-size:13px!important;flex:none}.nk-sidebar .seg.active{background:transparent!important;color:#b62035!important;border-bottom-color:#b62035!important}.nk-sidebar .seg:after{display:none!important}.nk-sidebar .seg:hover{background:#fff7f7!important}
+.app{margin:0 auto!important;max-width:1464px!important;width:100%!important;padding:30px 32px 40px!important}
+.topbar .brand:before{display:none!important}.brand h1{color:#55212f!important;font-size:27px!important;font-weight:600!important;letter-spacing:-.8px!important}.brand p{color:#9b858b!important}.live-chip{border-color:#eddde0!important}.aurora-command{border-color:#eddee0!important;border-radius:18px!important;padding:22px 24px!important;box-shadow:0 6px 20px #48101b03!important}.searchbox{background:#fbf8f8!important;border-color:#eee0e3!important}.search-icon-bubble{color:#b62035!important}.searchbox:focus-within{border-color:#d35c6e!important;box-shadow:0 0 0 3px #b6203510!important}.detail-switch{background:#f9f4f4!important;border-color:#eee0e3!important}.detail-btn.active{color:#b62035!important}.panel-label b{color:#a07e88!important}
+.search-empty-state{background:#a51f36!important;border:0!important;border-radius:24px!important}.nk-hero{min-height:350px;grid-template-columns:1.35fr 1fr;padding:48px 58px;gap:70px;background:radial-gradient(ellipse at 95% 0,#ef7a7940,transparent 58%)}.nk-eyebrow{color:#ffbdc5!important;font-size:10px;letter-spacing:2px}.nk-eyebrow:before{background:#ffb5bd}.nk-hero h2{color:#fff!important;font-size:44px!important;line-height:1.2!important;font-weight:500!important;max-width:580px;letter-spacing:-1.8px!important;white-space:pre-line}.nk-hero p{color:#f7d6dc!important;max-width:440px!important;font-size:13px!important}.nk-hero-hint{color:#eab9c4}.nk-hero-hint kbd{background:#ffffff15;color:#fff;border-color:#ffffff30}
+.nk-art{max-width:350px;width:100%;height:238px;background:#fffbfa;border-color:#fff;box-shadow:14px 18px 0 #ffffff16;transform:rotate(-6deg);padding:22px}.nk-art-top{color:#b62035}.nk-art-grid i{background:#f7efee}.nk-art-grid i:nth-child(3n){background:#f3bdc4}.nk-art-grid i:nth-child(4n){background:#e16b7b}.nk-art-grid i:nth-child(7n){background:#eedcda}.nk-art-badge{color:#a13347;border-color:#f0d9dd;background:white}.nk-art-badge b{color:#b62035}.nk-guides{gap:18px;margin-top:22px}.nk-guide{padding:24px;border-color:#ecdee1;border-radius:16px;color:#542936;transition:.2s}.nk-guide:hover{border-color:#d96275;box-shadow:0 8px 22px #b6203509}.nk-guide>span{background:#fff0f1;color:#b62035;width:44px;height:44px;border-radius:12px}.nk-guide b{font-size:14px;font-weight:600}.nk-guide small{color:#a28b92;font-size:12px}
+.view-title h2{text-transform:none!important;font-weight:600!important}.section-bar h3{text-transform:none!important}.ghead{background:#fff2f3!important;color:#923849!important;text-transform:none!important;font-weight:600!important}.period{color:#b26270!important;background:#fffbfb!important}.schedule-shell{border-color:#efdee2!important;border-radius:16px!important}.lesson{background:#fffafa!important;border:1px solid #f2dce1!important;border-left:3px solid #c83d55!important;padding:10px!important}.subject,.simple-main{font-family:inherit!important;color:#9e243c!important;font-weight:600!important;font-size:13px!important;text-transform:none!important;line-height:1.35!important;letter-spacing:0!important}.classcode{font-size:10px!important;font-weight:500!important;color:#a66d7a!important}.meta-row{font-size:10px!important;line-height:1.5!important}.meta-label{color:#b39a9f!important}.meta-value{color:#7c626a!important;font-weight:400!important}.stat{border-color:#efdee2!important;background:white!important}.stat-value{color:#b62035!important}.free-room-panel{border-color:#efdee2!important}.welcome-strip{background:#fff1f2!important;border-color:#f0dce0!important}.mode-badge{background:#fff0f1!important;color:#ad2036!important}.footer{color:#aa929a!important}
+button:focus-visible,input:focus-visible{outline:3px solid #dc7d90;outline-offset:3px}
+@media(max-width:1000px){.nk-hero{padding:36px;gap:30px}.nk-hero h2{font-size:36px!important}.nk-sidebar{padding:20px 24px 0!important}.nk-sidebar .segmented{gap:4px!important}}
+@media(max-width:700px){.nk-sidebar{padding:18px 16px 0!important}.nk-brand b{font-size:19px}.nk-sidebar .seg{font-size:12px!important;padding:11px 12px!important}.app{padding:22px 16px!important}.brand h1{font-size:23px!important}.nk-hero{padding:30px;grid-template-columns:1fr;min-height:290px}.nk-art{display:none}.nk-hero h2{font-size:34px!important}.nk-guides{grid-template-columns:1fr!important;gap:10px}.nk-guide{display:flex!important;padding:18px}.nk-guide>span{margin:0}.nk-hero-hint{display:none}.aurora-command{padding:18px!important}.subject,.simple-main{font-size:12px!important}.nk-sidebar .seg:before{display:none}.topbar{gap:14px}.live-chip{font-size:9px!important}}
+@media print{.nk-sidebar{display:none!important}.app{padding:0!important}.lesson{border-color:#ddd!important}}
+/* High-contrast welcome message on the pale rose banner. */
+.welcome-strip{background:#fff0f2!important;border:1px solid #e9b7c1!important;border-left:4px solid #b62035!important;color:#702033!important;padding:20px 22px!important}
+.welcome-message{font-family:'Google Sans','Be Vietnam Pro',Arial,sans-serif!important;color:#702033!important;font-size:clamp(18px,2vw,24px)!important;font-weight:600!important;line-height:1.45!important;letter-spacing:0!important;opacity:1!important;text-shadow:none!important}
+.welcome-message strong{color:#a31634!important;font-weight:700!important}
+.welcome-eyebrow{color:#91384b!important;font-weight:600!important;letter-spacing:.1em!important}
+.welcome-meta{color:#86243b!important;background:#fff!important;border:1px solid #e9b7c1!important}
+.welcome-strip:before{color:rgba(166,22,52,.06)!important}
+@media(max-width:520px){.welcome-strip{padding:15px 16px!important}.welcome-message{font-size:18px!important;line-height:1.5!important}}
+/* Plain white timetable cards: strong type, no tinted pills or decoration. */
+body{--lesson-title-size:17px;--lesson-text-size:13px}
+body[data-ui-scale="small"]{--lesson-title-size:16px;--lesson-text-size:12px}
+body[data-ui-scale="large"]{--lesson-title-size:19px;--lesson-text-size:14px}
+body[data-ui-scale="xlarge"]{--lesson-title-size:21px;--lesson-text-size:15px}
+body .schedule-grid .lesson{background:#fff!important;background-image:none!important;border:1px solid #d2d5da!important;border-left:1px solid #d2d5da!important;border-radius:10px!important;box-shadow:none!important;padding:13px!important;color:#202124!important;opacity:1!important}
+body .schedule-grid .lesson:before,body .schedule-grid .lesson:after,body .lesson .simple-room:before{display:none!important;content:none!important}
+body .schedule-grid .lesson .subject,body .schedule-grid .lesson .simple-main{color:#202124!important;font-size:var(--lesson-title-size)!important;font-weight:700!important;line-height:1.35!important;letter-spacing:0!important;text-shadow:none!important}
+body .schedule-grid .lesson .classcode{display:block!important;background:transparent!important;background-image:none!important;border:0!important;box-shadow:none!important;color:#292b30!important;border-radius:0!important;padding:0!important;margin:8px 0!important;font-size:var(--lesson-text-size)!important;font-weight:700!important;line-height:1.4!important}
+body .schedule-grid .lesson .meta{gap:5px!important}
+body .schedule-grid .lesson .meta-row{font-size:var(--lesson-text-size)!important;line-height:1.5!important;gap:8px!important}
+body .schedule-grid .lesson .meta-label{color:#4c4f55!important;font-size:var(--lesson-text-size)!important;font-weight:600!important;opacity:1!important}
+body .schedule-grid .lesson .meta-value,body .schedule-grid .lesson .simple-room{color:#202124!important;font-size:var(--lesson-text-size)!important;font-weight:600!important;line-height:1.5!important;opacity:1!important}
+body .schedule-grid .lesson .count-badge{background:transparent!important;border:0!important;box-shadow:none!important;color:#414349!important;font-size:var(--lesson-text-size)!important;font-weight:600!important;padding:0!important;margin-top:9px!important}
+
+.nk-brand small{font-size:12px!important;line-height:1.5!important;letter-spacing:0!important;text-transform:none!important;color:#78525c!important;max-width:100%;white-space:normal!important}
+
+</style>
 </head>
-<body>
+<body><aside class="nk-sidebar"><div class="nk-brand"><div class="nk-mark">NK</div><div><b>Nguyễn Khuyến</b><small>Thời khóa biểu áp dụng từ tuần 9, ngày 2/11/2026.</small></div></div><div class="nk-nav-label">THỜI KHÓA BIỂU</div><div id="nkNavigation"></div><div class="nk-sidebar-foot"><strong>Mỗi ngày, một hành trình mới.</strong>Tra cứu lịch học và kết nối<br>với nhịp sống nhà trường.</div></aside>
 <div class="app">
   <header class="topbar aurora-topbar">
     <div class="brand">
@@ -1787,8 +1859,8 @@ body{
       </div>
       <div class="brand-copy">
         <span class="brand-eyebrow">SMART TIMETABLE</span>
-        <h1>Hệ thống thời khóa biểu trường THPT Nguyễn Khuyến 2026-2027</h1>
-        <p>ÁP DỤNG TỪ NGÀY 07/9/2026 TUẦN 1 - HKI</p>
+        <h1>Lịch học của bạn</h1>
+        <p>Mọi lịch học, trong một không gian.</p>
       </div>
     </div>
     <div class="live-wrap aurora-live-wrap">
@@ -1903,18 +1975,7 @@ body{
     <div class="welcome-meta" id="welcomeMeta">Nguyễn Khuyến</div>
   </section>
 
-  <section class="search-empty-state" id="searchEmptyState">
-    <div class="search-empty-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/>
-      </svg>
-    </div>
-    <div class="search-empty-copy">
-      <div class="search-empty-kicker">TRA CỨU THỜI KHÓA BIỂU</div>
-      <h2 id="searchEmptyTitle">NHẬP HỌ VÀ TÊN HỌC SINH</h2>
-      <p id="searchEmptyText">THỜI KHÓA BIỂU CHỈ XUẤT HIỆN SAU KHI BẠN NHẬP VÀ CHỌN ĐÚNG HỌ TÊN.</p>
-    </div>
-  </section>
+  <section class="search-empty-state" id="searchEmptyState"><div class="nk-hero"><div><div class="nk-eyebrow">HỌC TẬP CÓ KẾ HOẠCH</div><h2 id="searchEmptyTitle"></h2><p id="searchEmptyText"></p><div class="nk-hero-hint"><kbd>Ctrl K</kbd> để tìm kiếm nhanh hơn</div></div><div class="nk-art" aria-hidden="true"><div class="nk-art-top"><b>LỊCH TUẦN CỦA BẠN</b><span>•••</span></div><div class="nk-art-grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="nk-art-badge"><b>✓</b> Sẵn sàng đến lớp</div></div></div></section><div class="nk-guides"><button class="nk-guide" data-start="student"><span>⌕</span><div><b>Lịch học cá nhân</b><small>Chính khóa và trái buổi, cùng một nơi.</small></div></button><button class="nk-guide" data-start="teacher"><span>▤</span><div><b>Lịch giảng dạy</b><small>Tra cứu tiết dạy, lớp và phòng học.</small></div></button><button class="nk-guide" data-start="freeRoom"><span>▦</span><div><b>Tìm phòng trống</b><small>Theo dõi phòng học theo từng ca.</small></div></button></div>
 
   <section class="view-head" id="viewHead">
     <div class="view-title"><h2 id="viewTitle"></h2><p id="viewSub"></p></div>
@@ -1981,7 +2042,7 @@ schoolSessionBars:$('#schoolSessionBars'),schoolRoomRanking:$('#schoolRoomRankin
 schoolSubjectRanking:$('#schoolSubjectRanking'),schoolRoomFreeRate:$('#schoolRoomFreeRate'),schoolRoomHealth:$('#schoolRoomHealth')};
 function clean(v){return v==null?'':String(v).trim()}
 function upperData(v){return clean(v).toLocaleUpperCase('vi-VN')}
-function norm(v){return clean(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
+function norm(v){return clean(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[đĐ]/g,'d').toLowerCase()}
 function esc(v){return clean(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function key(d,p){return d+'-'+p}
 function slotKey(session,d,p){return session+'-'+d+'-'+p}
@@ -2972,12 +3033,13 @@ function placeholder(){
 }
 function updateEmptySearchPrompt(){
   const map={
-    student:['NHẬP HỌ VÀ TÊN HỌC SINH','THỜI KHÓA BIỂU CỦA HỌC SINH CHỈ HIỆN SAU KHI BẠN NHẬP TÊN VÀ CHỌN ĐÚNG KẾT QUẢ.'],
-    teacher:['NHẬP HỌ VÀ TÊN GIÁO VIÊN','THỜI KHÓA BIỂU GIẢNG DẠY CHỈ HIỆN SAU KHI BẠN NHẬP TÊN VÀ CHỌN ĐÚNG GIÁO VIÊN.'],
-    class:['NHẬP MÃ LỚP','VÍ DỤ HOA08, 12-BR2. THỜI KHÓA BIỂU CHỈ HIỆN SAU KHI CHỌN KẾT QUẢ.'],
-    room:['NHẬP TÊN PHÒNG','LỊCH SỬ DỤNG PHÒNG CHỈ HIỆN SAU KHI CHỌN ĐÚNG PHÒNG.'],
+    student:['Một tuần chủ động.
+Mỗi ngày hứng khởi.','Tìm tên của bạn ở ô phía trên để xem lịch học, môn học và phòng học trong tuần.'],
+    teacher:['Một tuần giảng dạy, trong tầm tay.','Nhập tên giáo viên để xem lịch dạy hợp nhất, lớp phụ trách và phòng học.'],
+    class:['Tìm lớp học của bạn.','Nhập mã lớp, ví dụ HOA08 hoặc 12-BR2, rồi chọn kết quả phù hợp.'],
+    room:['Mỗi phòng học, một lịch trình.','Tìm tên phòng để xem các lớp học và giáo viên sử dụng phòng trong tuần.'],
     freeRoom:['MA TRẬN PHÒNG HỌC TOÀN TRƯỜNG','TAB NÀY TỰ HIỂN THỊ TOÀN BỘ 50 CA, KHÔNG CẦN TÌM KIẾM.'],
-    homeClass:['NHẬP LỚP GỐC','LỊCH LỚP GỐC CHỈ LẤY TỪ NGUỒN THỜI KHÓA BIỂU CHÍNH KHÓA.']
+    homeClass:['Cùng lớp, cùng nhịp học.','Nhập tên lớp gốc để xem lịch chính khóa của cả lớp.']
   };
   const [title,body]=map[state.mode]||map.student;
   els.searchEmptyTitle.textContent=title;els.searchEmptyText.textContent=body
@@ -3056,14 +3118,14 @@ function setMobileLite(on){
 function updateExportLabels(){
   if(!els.pngMenuTitle||!els.pngMenuDesc)return;
   if(state.mode==='teacher'){
-    els.pngMenuTitle.textContent='PNG HÌNH NỀN · MÔN + LỚP + PHÒNG';
+    els.pngMenuTitle.textContent='PNG ĐIỆN THOẠI · MÔN + LỚP + PHÒNG';
     els.pngMenuDesc.textContent='PHIÊN BẢN GIÁO VIÊN · MÔN HỌC, LỚP / MÃ LỚP VÀ PHÒNG';
   }else if(state.mode==='student'){
-    els.pngMenuTitle.textContent='PNG HÌNH NỀN · MÔN + PHÒNG';
+    els.pngMenuTitle.textContent='PNG ĐIỆN THOẠI · MÔN + PHÒNG';
     els.pngMenuDesc.textContent='PHIÊN BẢN HỌC SINH · CHỈ GIỮ MÔN HỌC VÀ PHÒNG';
   }else{
-    els.pngMenuTitle.textContent='PNG HÌNH NỀN';
-    els.pngMenuDesc.textContent='ƯU TIÊN NỘI DUNG TINH GỌN, CHỮ LỚN, DỄ XEM TRÊN ĐIỆN THOẠI';
+    els.pngMenuTitle.textContent='PNG NỀN ĐIỆN THOẠI';
+    els.pngMenuDesc.textContent='ẢNH DỌC 9:16 · CHỮ LỚN · ÍT KHOẢNG TRỐNG';
   }
 }
 
@@ -3146,15 +3208,30 @@ function currentView(){
     ]
   }
 }
+function shortSubject(value){
+  const names={
+    'toan hoc':'Toán','toan':'Toán','ngu van':'Ngữ văn','vat li':'Vật lí','vat ly':'Vật lí',
+    'hoa hoc':'Hóa','sinh hoc':'Sinh','lich su':'Lịch sử','dia li':'Địa lí','dia ly':'Địa lí',
+    'ngoai ngu':'Ngoại ngữ','tieng anh':'Tiếng Anh','tin hoc':'Tin học',
+    'giao duc kinh te va phap luat':'KT & Pháp luật',
+    'noi dung giao duc cua dia phuong':'GD địa phương','giao duc dia phuong':'GD địa phương',
+    'hoat dong trai nghiem, huong nghiep':'Trải nghiệm','hoat dong trai nghiem huong nghiep':'Trải nghiệm',
+    'giao duc quoc phong va an ninh':'Quốc phòng – AN','giao duc quoc phong - an ninh':'Quốc phòng – AN',
+    'giao duc the chat':'Giáo dục thể chất','gdtc':'Giáo dục thể chất',
+    'chao co':'Chào cờ','sinh hoat lop':'Sinh hoạt lớp','cong nghe':'Công nghệ',
+    'tri tue nhan tao':'Trí tuệ nhân tạo','bong ro':'Giáo dục thể chất','cau long':'Giáo dục thể chất'
+  };
+  return names[norm(value)]||clean(value);
+}
 function lessonHtml(x){
   const l=x.lesson,style=subjectVars(l.subject||l.code),home=l.source==='home';
   if(state.detailMode==='simple'){
     if(state.mode==='teacher')return`<div class="lesson simple-card" style="${style}"><div class="simple-main">${esc(l.code||l.homeClass||'Lớp')}</div><div class="simple-room">${esc(l.room||'Chưa có phòng')}</div></div>`;
-    if(state.mode==='room')return`<div class="lesson simple-card" style="${style}"><div class="simple-main">${esc(l.subject||l.code||'Tiết học')}</div><div class="simple-room">${esc(l.code||l.homeClass||'Lớp')}</div></div>`;
-    return`<div class="lesson simple-card" style="${style}"><div class="simple-main">${esc(l.subject||'Chưa có môn')}</div><div class="simple-room">${esc(l.room||'Chưa có phòng')}</div></div>`
+    if(state.mode==='room')return`<div class="lesson simple-card" style="${style}"><div class="simple-main">${esc(shortSubject(l.subject)||l.code||'Tiết học')}</div><div class="simple-room">${esc(l.code||l.homeClass||'Lớp')}</div></div>`;
+    return`<div class="lesson simple-card" style="${style}"><div class="simple-main">${esc(shortSubject(l.subject)||'Chưa có môn')}</div><div class="simple-room">${esc(l.room||'Chưa có phòng')}</div></div>`
   }
   return`<div class="lesson ${home?'home-lesson':''}" style="${style}">
-    <div class="subject">${esc(l.subject||'Chưa có môn')}</div>
+    <div class="subject" title="${esc(l.subject)}">${esc(shortSubject(l.subject)||'Chưa có môn')}</div>
     ${l.code?`<div class="classcode">${home?'Lớp ':'Mã lớp · '}${esc(l.code)}</div>`:''}
     <div class="meta">
       ${l.teacher?`<div class="meta-row"><span class="meta-label">GV</span><span class="meta-value">${esc(l.teacher)}</span></div>`:''}
@@ -3265,7 +3342,7 @@ function renderView(){
   if(state.mode==='freeRoom'){
     hideSchoolStats();showTimetable();renderFreeRoomView(v);return
   }
-  hideFreeRoomView();hideSchoolStats();updateExportLabels();els.primaryGridTitle.textContent='Buổi sáng';els.primaryGridSub.textContent=(window.innerWidth<=720?'VUỐT NGANG ĐỂ XEM CÁC THỨ · ':'')+(state.mode==='homeClass'?'CHỈ LỊCH CHÍNH KHÓA CỦA LỚP':state.detailMode==='simple'?(state.mode==='teacher'?'CHỈ HIỂN THỊ LỚP VÀ PHÒNG':'HIỂN THỊ TỐI GIẢN THEO CHẾ ĐỘ ĐANG CHỌN'):'MÔN HỌC ĐƯỢC PHÂN MÀU · ĐẦY ĐỦ LỚP, GIÁO VIÊN VÀ PHÒNG')+(state.mobileLite&&window.innerWidth<=720?' · PHIÊN BẢN DI ĐỘNG GỌN':'');const periods=v.primaryPeriods||HOME_PERIODS;renderGrid(v.m,periods);renderHomeSchedule(v);renderRoster(v);renderStats(v);const occupied=periods.reduce((n,p)=>n+DAYS.filter(d=>(v.m[key(d,p)]||[]).length).length,0);els.gridNote.textContent=`${occupied}/${periods.length*DAYS.length} ô có lịch`;els.exportBtn.disabled=false
+  hideFreeRoomView();hideSchoolStats();updateExportLabels();els.primaryGridTitle.textContent='Buổi sáng';els.primaryGridSub.textContent=(window.innerWidth<=720?'VUỐT NGANG ĐỂ XEM CÁC THỨ · ':'')+(state.mode==='homeClass'?'CHỈ LỊCH CHÍNH KHÓA CỦA LỚP':state.detailMode==='simple'?(state.mode==='teacher'?'CHỈ HIỂN THỊ LỚP VÀ PHÒNG':'HIỂN THỊ TỐI GIẢN THEO CHẾ ĐỘ ĐANG CHỌN'):'ĐẦY ĐỦ MÔN HỌC, LỚP, GIÁO VIÊN VÀ PHÒNG')+(state.mobileLite&&window.innerWidth<=720?' · PHIÊN BẢN DI ĐỘNG GỌN':'');const periods=v.primaryPeriods||HOME_PERIODS;renderGrid(v.m,periods);renderHomeSchedule(v);renderRoster(v);renderStats(v);const occupied=periods.reduce((n,p)=>n+DAYS.filter(d=>(v.m[key(d,p)]||[]).length).length,0);els.gridNote.textContent=`${occupied}/${periods.length*DAYS.length} ô có lịch`;els.exportBtn.disabled=false
 }
 function parseCsv(text){const rows=[];let row=[],cell='',q=false;for(let i=0;i<text.length;i++){const c=text[i];if(q){if(c==='"'&&text[i+1]==='"'){cell+='"';i++}else if(c==='"')q=false;else cell+=c}else{if(c==='"')q=true;else if(c===','){row.push(cell);cell=''}else if(c==='\n'){row.push(cell.replace(/\r$/,''));rows.push(row);row=[];cell=''}else cell+=c}}if(cell.length||row.length){row.push(cell.replace(/\r$/,''));rows.push(row)}return rows}
 function gvizRows(payload,requiredHeader){
@@ -3743,22 +3820,23 @@ function pngColumnLayout(ctx,m,variant,scale=1){
   const minCol=72*scale,maxCol=(variant.tertiary?172:186)*scale;
   const wrappedWidth=(text,fontPx,maxLines)=>{
     const value=clean(text),words=value.split(/\s+/).filter(Boolean);
-    ctx.font=`900 ${fontPx*scale}px "Segoe UI",Arial,sans-serif`;
+    ctx.font=`900 ${fontPx*scale}px "Google Sans","Be Vietnam Pro",Arial,sans-serif`;
     const full=ctx.measureText(value).width;
     const longest=words.reduce((w,word)=>Math.max(w,ctx.measureText(word).width),0);
     // Cột chỉ đủ cho từ dài nhất hoặc trung bình số dòng cho phép.
     // Phần còn lại tự xuống dòng thay vì kéo rộng cả cột.
     return Math.max(longest,full/Math.max(1,maxLines))+pad
   };
-  const cols=DAYS.map(day=>{
+  const days=DAYS.filter(day=>HOME_PERIODS.some(p=>(m[key(day,p)]||[]).length));
+  const cols=days.map(day=>{
     let maxW=minCol;
-    ctx.font=`900 ${15*scale}px "Segoe UI",Arial,sans-serif`;
+    ctx.font=`900 ${15*scale}px "Google Sans","Be Vietnam Pro",Arial,sans-serif`;
     maxW=Math.max(maxW,ctx.measureText(`THỨ ${day}`).width+20*scale);
 
     for(const p of HOME_PERIODS){
       for(const it of (m[key(day,p)]||[])){
         const l=it.lesson||{};
-        const subjectW=wrappedWidth(clean(l.subject)||'CHƯA CÓ MÔN',26,variant.tertiary?2:3);
+        const subjectW=wrappedWidth(shortSubject(l.subject)||'CHƯA CÓ MÔN',26,variant.tertiary?2:3);
         const secondaryW=wrappedWidth(variant.secondary(l),21,2);
         const tertiaryW=variant.tertiary?wrappedWidth(variant.tertiary(l),19,2):0;
         maxW=Math.max(maxW,Math.min(maxCol,subjectW),Math.min(maxCol,secondaryW),Math.min(maxCol,tertiaryW))
@@ -3768,8 +3846,8 @@ function pngColumnLayout(ctx,m,variant,scale=1){
     return Math.round(Math.max(minCol,Math.min(maxCol,maxW)))
   });
 
-  const totalW=labelW+cols.reduce((a,b)=>a+b,0)+gap*(DAYS.length-1);
-  return{labelW,gap,cols,totalW}
+  const totalW=labelW+cols.reduce((a,b)=>a+b,0)+gap*Math.max(0,days.length-1);
+  return{labelW,gap,cols,totalW,days}
 }
 function pngSessionHeight(m,periods,scale=1,variant=null){
   const mt=canvasSessionMetrics(m,periods,scale,variant);
@@ -3780,7 +3858,7 @@ function drawPosterSession(ctx,m,periods,x,y,layout,title,variant,scale=1){
 
   ctx.textAlign='left';
   ctx.fillStyle='#18243b';
-  ctx.font=`900 ${28*scale}px "Segoe UI",Arial,sans-serif`;
+  ctx.font=`900 ${28*scale}px "Google Sans","Be Vietnam Pro",Arial,sans-serif`;
   ctx.fillText(title,x,y+32*scale);
 
   let gy=y+52*scale;
@@ -3790,11 +3868,11 @@ function drawPosterSession(ctx,m,periods,x,y,layout,title,variant,scale=1){
 
   ctx.textAlign='center';
   ctx.fillStyle='#57657b';
-  ctx.font=`900 ${15*scale}px "Segoe UI",Arial,sans-serif`;
+  ctx.font=`900 ${15*scale}px "Google Sans","Be Vietnam Pro",Arial,sans-serif`;
   ctx.fillText('TIẾT',x+labelW/2,gy+26*scale);
 
   let cursor=x+labelW;
-  DAYS.forEach((d,i)=>{
+  layout.days.forEach((d,i)=>{
     const cw=cols[i];
     ctx.fillText(`THỨ ${d}`,cursor+cw/2,gy+26*scale);
     cursor+=cw+gap
@@ -3810,17 +3888,17 @@ function drawPosterSession(ctx,m,periods,x,y,layout,title,variant,scale=1){
 
     ctx.textAlign='center';
     ctx.fillStyle='#58667a';
-    ctx.font=`900 ${16*scale}px "Segoe UI",Arial,sans-serif`;
+    ctx.font=`900 ${16*scale}px "Google Sans","Be Vietnam Pro",Arial,sans-serif`;
     ctx.fillText(`T${p}`,x+labelW/2,gy+32*scale);
 
     let cx=x+labelW;
-    for(let di=0;di<DAYS.length;di++){
-      const d=DAYS[di],colW=cols[di],list=m[key(d,p)]||[];
+    for(let di=0;di<layout.days.length;di++){
+      const d=layout.days[di],colW=cols[di],list=m[key(d,p)]||[];
       let cy=gy+8*scale;
 
       if(!list.length){
         ctx.fillStyle='#b8c1ce';
-        ctx.font=`700 ${16*scale}px "Segoe UI",Arial,sans-serif`;
+        ctx.font=`700 ${16*scale}px "Google Sans","Be Vietnam Pro",Arial,sans-serif`;
         ctx.fillText('—',cx+colW/2,gy+rh/2);
         cx+=colW+gap;
         continue
@@ -3829,29 +3907,29 @@ function drawPosterSession(ctx,m,periods,x,y,layout,title,variant,scale=1){
       for(const it of list){
         const l=it.lesson,pal=subjectPalette(l.subject||l.code),boxW=colW,boxH=mt.itemH-8*scale;
 
-        ctx.fillStyle=pal.soft;
+        ctx.fillStyle='#fff1f3';
         roundRect(ctx,cx,cy,boxW,boxH,15*scale);
 
-        ctx.fillStyle=pal.accent;
+        ctx.fillStyle='#bd2943';
         ctx.fillRect(cx,cy,5*scale,boxH);
 
         const tx=cx+15*scale,maxText=boxW-24*scale;
 
         ctx.textAlign='left';
-        ctx.fillStyle=pal.ink;
-        ctx.font=`900 ${26*scale}px "Segoe UI",Arial,sans-serif`;
-        const subjectLines=wrapLines(ctx,l.subject||'CHƯA CÓ MÔN',maxText,variant.tertiary?2:3);
+        ctx.fillStyle='#91223a';
+        ctx.font=`900 ${26*scale}px "Google Sans","Be Vietnam Pro",Arial,sans-serif`;
+        const subjectLines=wrapLines(ctx,shortSubject(l.subject)||'CHƯA CÓ MÔN',maxText,variant.tertiary?2:3);
         let ty=cy+29*scale;
         ty+=drawLines(ctx,subjectLines,tx,ty,26*scale);
 
         ctx.fillStyle='#58657a';
-        ctx.font=`900 ${21*scale}px "Segoe UI",Arial,sans-serif`;
+        ctx.font=`900 ${21*scale}px "Google Sans","Be Vietnam Pro",Arial,sans-serif`;
         const secondLines=wrapLines(ctx,variant.secondary(l),maxText,2);
         if(variant.tertiary){
           const secondY=ty+7*scale;
           ty=secondY+drawLines(ctx,secondLines,tx,secondY,22*scale);
           ctx.fillStyle='#758196';
-          ctx.font=`850 ${19*scale}px "Segoe UI",Arial,sans-serif`;
+          ctx.font=`850 ${19*scale}px "Google Sans","Be Vietnam Pro",Arial,sans-serif`;
           const thirdLines=wrapLines(ctx,variant.tertiary(l),maxText,2);
           drawLines(ctx,thirdLines,tx,ty+7*scale,20*scale)
         }else{
@@ -3875,121 +3953,146 @@ function drawPosterSession(ctx,m,periods,x,y,layout,title,variant,scale=1){
 
   return{height:gy-y,width:totalW}
 }
-function exportPng(){
+function pngVisibleSessions(v){
+  return [{m:v.m,periods:v.primaryPeriods||HOME_PERIODS,title:'BUỔI SÁNG'},
+    ...(v.homeSections||[]).map(section=>({...section,title:'BUỔI CHIỀU'}))]
+    .map(section=>({...section,periods:section.periods.filter(p=>DAYS.some(d=>(section.m[key(d,p)]||[]).length))}))
+    .filter(section=>section.periods.length);
+}
+function phonePngDays(sessions){
+  return DAYS.map(day=>{
+    const groups=sessions.map(section=>({title:section.title,
+      items:section.periods.flatMap(period=>(section.m[key(day,period)]||[]).map(item=>({period,lesson:item.lesson})))
+    })).filter(group=>group.items.length);
+    const rooms=groups.flatMap(group=>group.items.map(item=>clean(item.lesson.room)||'Chưa rõ phòng'));
+    const commonRoom=rooms.length&&rooms.every(room=>room===rooms[0])?rooms[0]:'';
+    groups.forEach(group=>{group.baseRoom=clean(group.items[0].lesson.room)||'Chưa rõ phòng'});
+    return {day,groups,commonRoom};
+  }).filter(day=>day.groups.length);
+}
+function phoneDayPalette(day){
+  return ({
+    2:{background:'#fffafb',accent:'#8f1930',ink:'#28151a',muted:'#493039'},
+    3:{background:'#fff7f9',accent:'#812243',ink:'#28151a',muted:'#493039'},
+    4:{background:'#fffaf5',accent:'#913724',ink:'#2d1c14',muted:'#49372c'},
+    5:{background:'#fdf8fc',accent:'#71304f',ink:'#28151f',muted:'#49303f'},
+    6:{background:'#faf8fb',accent:'#58273f',ink:'#24151d',muted:'#40303b'}
+  })[day]||{background:'#fffafb',accent:'#8f1930',ink:'#28151a',muted:'#493039'};
+}
+function phonePngLayout(ctx,days,variant,font,columns,splitAt=null){
+  const width=(1000-(columns-1)*24)/columns,pad=18,line=font*1.16;
+  let fitsWidth=true;
+  const fontAt=(weight,size)=>{ctx.font=`${weight} ${size}px "Google Sans","Be Vietnam Pro",Arial,sans-serif`};
+  const linesFor=(text,maxWidth)=>{
+    const lines=wrapLines(ctx,text,maxWidth);
+    if(lines.some(text=>ctx.measureText(text).width>maxWidth))fitsWidth=false;
+    return lines;
+  };
+  const measured=days.map(day=>{
+    fontAt(700,font*.98);
+    const heading=linesFor('Thứ '+day.day+(day.commonRoom?' (phòng '+day.commonRoom+')':''),width-pad*2);
+    let h=pad+heading.length*font*1.16+font*.25;
+    const groups=day.groups.map(group=>{
+      fontAt(600,font*.70);
+      const label=linesFor(group.title+(!day.commonRoom?' · Phòng '+group.baseRoom:''),width-pad*2);
+      h+=label.length*font*.9+font*.3;
+      const items=group.items.map(item=>{
+        const room=clean(item.lesson.room)||'Chưa rõ phòng';
+        const roomNote=room!==(day.commonRoom||group.baseRoom)?'Phòng '+room:'';
+        const contentWidth=width-pad*2-font*1.45;
+        fontAt(600,font*.72);
+        const noteWidth=roomNote?Math.min(contentWidth*.42,ctx.measureText(roomNote).width):0;
+        const note=roomNote?linesFor(roomNote,noteWidth):[];
+        const subjectWidth=contentWidth-(noteWidth?noteWidth+font*.3:0);
+        fontAt(700,font);
+        const subject=linesFor(shortSubject(item.lesson.subject)||'Chưa có môn',subjectWidth);
+        fontAt(600,font*.82);
+        const meta=variant.tertiary?linesFor(variant.secondary(item.lesson),contentWidth):[];
+        const mainHeight=Math.max(subject.length*line,note.length*font*.9);
+        const height=mainHeight+meta.length*font*.98+font*.28;
+        h+=height;return {...item,subject,meta,note,noteWidth,mainHeight,height};
+      });return {...group,label,items};
+    });return {...day,heading,groups,height:h+pad};
+  });
+  const split=splitAt??Math.ceil(days.length/columns);
+  const stacks=columns===1?[measured]:[measured.slice(0,split),measured.slice(split)];
+  const heights=stacks.map(stack=>stack.reduce((sum,day)=>sum+day.height,0)+Math.max(0,stack.length-1)*14);
+  return {width,stacks,heights,font,fitsWidth};
+}
+async function exportPng(){
   const v=ensureView();if(!v)return;
-
-  const periods=v.primaryPeriods||HOME_PERIODS;
-  const afternoon=v.homeSections?.[0]||null;
-  const variant=pngVariant();
-
-  // Wallpaper phổ biến 9:20. Các vùng biên được chừa để tránh crop
-  // trên màn hình 19.5:9, 20:9, 20.5:9, 21:9 và phần UI hệ thống.
-  const WALL_W=1440,WALL_H=3200;
-  const SAFE_X=86,SAFE_TOP=220,SAFE_BOTTOM=170;
-  const SAFE_W=WALL_W-SAFE_X*2;
-  const SAFE_H=WALL_H-SAFE_TOP-SAFE_BOTTOM;
-
-  const probe=document.createElement('canvas').getContext('2d');
-  const naturalMorning=pngColumnLayout(probe,v.m,variant,1);
-  const naturalAfternoon=afternoon?pngColumnLayout(probe,afternoon.m,variant,1):null;
-  const naturalTableW=Math.max(naturalMorning.totalW,naturalAfternoon?.totalW||0);
-
-  const naturalTitleH=128;
-  const naturalMorningH=pngSessionHeight(v.m,periods,1,variant);
-  const naturalAfternoonH=afternoon?pngSessionHeight(afternoon.m,afternoon.periods,1,variant):0;
-  const naturalGap=afternoon?30:0;
-  const naturalFooterH=44;
-  const naturalContentH=naturalTitleH+naturalMorningH+naturalGap+naturalAfternoonH+naturalFooterH;
-
-  // Tự scale sao cho toàn bộ nội dung luôn nằm trong vùng an toàn.
-  // Có thể phóng nhẹ nếu lịch ít nhưng không vượt quá 1.28x để chữ không quá lớn.
-  let scale=Math.min(1.28,SAFE_W/naturalTableW,SAFE_H/naturalContentH);
-  scale=Math.max(.58,scale);
-
-  const c=document.createElement('canvas');
-  c.width=WALL_W;
-  c.height=WALL_H;
-  const ctx=c.getContext('2d');
-
-  const morningLayout=pngColumnLayout(ctx,v.m,variant,scale);
-  const afternoonLayout=afternoon?pngColumnLayout(ctx,afternoon.m,variant,scale):null;
-  const tableW=Math.max(morningLayout.totalW,afternoonLayout?.totalW||0);
-
-  const titleH=128*scale;
-  const morningH=pngSessionHeight(v.m,periods,scale,variant);
-  const afternoonH=afternoon?pngSessionHeight(afternoon.m,afternoon.periods,scale,variant):0;
-  const gap=afternoon?30*scale:0;
-  const footerH=44*scale;
-  const contentH=titleH+morningH+gap+afternoonH+footerH;
-
-  // Nền wallpaper
-  const g=ctx.createLinearGradient(0,0,0,WALL_H);
-  g.addColorStop(0,'#f5f7ff');
-  g.addColorStop(.48,'#eef4fb');
-  g.addColorStop(1,'#eaf0f7');
-  ctx.fillStyle=g;
-  ctx.fillRect(0,0,WALL_W,WALL_H);
-
-  // Vầng sáng nhẹ để wallpaper không bị phẳng.
-  const glow1=ctx.createRadialGradient(WALL_W*.86,WALL_H*.12,10,WALL_W*.86,WALL_H*.12,620);
-  glow1.addColorStop(0,'rgba(96,116,216,.16)');
-  glow1.addColorStop(1,'rgba(96,116,216,0)');
-  ctx.fillStyle=glow1;ctx.fillRect(0,0,WALL_W,WALL_H);
-
-  const glow2=ctx.createRadialGradient(WALL_W*.08,WALL_H*.86,10,WALL_W*.08,WALL_H*.86,650);
-  glow2.addColorStop(0,'rgba(41,151,123,.12)');
-  glow2.addColorStop(1,'rgba(41,151,123,0)');
-  ctx.fillStyle=glow2;ctx.fillRect(0,0,WALL_W,WALL_H);
-
-  // Canh giữa trong vùng an toàn, tránh sát camera/notch và dock.
-  const safeCenterX=SAFE_X+SAFE_W/2;
-  const contentX=Math.round(safeCenterX-tableW/2);
-  const verticalExtra=Math.max(0,SAFE_H-contentH);
-  let y=Math.round(SAFE_TOP+verticalExtra/2);
-
-  // Card trung tâm vừa đúng khối nội dung.
-  const cardPadX=24*scale,cardPadY=24*scale;
-  const cardX=Math.max(44,contentX-cardPadX);
-  const cardY=Math.max(SAFE_TOP-10,y-cardPadY);
-  const cardW=Math.min(WALL_W-cardX-44,tableW+cardPadX*2);
-  const cardH=Math.min(SAFE_TOP+SAFE_H-cardY+10,contentH+cardPadY*2);
-
-  ctx.fillStyle='rgba(255,255,255,.94)';
-  roundRect(ctx,cardX,cardY,cardW,cardH,28*scale);
-
-  // Tiêu đề
-  ctx.textAlign='left';
-  ctx.fillStyle='#16233a';
-  ctx.font=`900 ${38*scale}px "Segoe UI",Arial,sans-serif`;
-  const titleLines=wrapLines(ctx,v.title,tableW,2);
-  let ty=y+40*scale;
-  ty+=drawLines(ctx,titleLines,contentX,ty,41*scale);
-
-  ctx.fillStyle='#6f7d92';
-  ctx.font=`800 ${16*scale}px "Segoe UI",Arial,sans-serif`;
-  ctx.fillText(`THỜI KHÓA BIỂU · ${variant.caption}`,contentX,ty+15*scale);
-
-  y+=titleH;
-
-  y+=drawPosterSession(ctx,v.m,periods,contentX,y,morningLayout,'BUỔI SÁNG',variant,scale).height;
-
-  if(afternoon){
-    y+=gap;
-    y+=drawPosterSession(ctx,afternoon.m,afternoon.periods,contentX,y,afternoonLayout,'BUỔI CHIỀU',variant,scale).height
-  }
-
-  ctx.fillStyle='#8490a3';
-  ctx.font=`700 ${12*scale}px "Segoe UI",Arial,sans-serif`;
-  ctx.fillText(`CẬP NHẬT ${fmt(state.lastSync)}`,contentX,Math.min(SAFE_TOP+SAFE_H-18,y+28*scale));
-
-  const a=document.createElement('a');
-  a.download=`${safeName(v.title)}_${variant.fileSuffix}_Wallpaper_9x20.png`;
-  a.href=c.toDataURL('image/png');
-  a.click();
-
-  action(state.mode==='teacher'
-    ?'Đã xuất hình nền 9:20 · Môn + Lớp + Phòng'
-    :'Đã xuất hình nền 9:20 · Môn + Phòng')
+  const days=phonePngDays(pngVisibleSessions(v)),variant=pngVariant();
+  if(!days.length){action('Không có lịch để xuất PNG');return}
+  try{
+    await document.fonts.ready;
+    const c=document.createElement('canvas');c.width=1080;c.height=1920;
+    const ctx=c.getContext('2d');
+    ctx.font='600 38px "Google Sans","Be Vietnam Pro",Arial,sans-serif';
+    const title=wrapLines(ctx,v.title,1000,2);
+    const SAFE_TOP=200,SAFE_BOTTOM=200,FOOTER_H=38;
+    const headerHeight=title.length*43+62;
+    const availableHeight=1920-SAFE_TOP-SAFE_BOTTOM-headerHeight-FOOTER_H;
+    let best=null;
+    // Compare every chronological division, instead of splitting by day count.
+    const candidates=[{columns:1,split:days.length},
+      ...days.slice(1).map((_,i)=>({columns:2,split:i+1}))];
+    for(const candidate of candidates){
+      let low=1,high=100;
+      for(let i=0;i<20;i++){
+        const mid=(low+high)/2;
+        const layout=phonePngLayout(ctx,days,variant,mid,candidate.columns,candidate.split);
+        if(layout.fitsWidth&&Math.max(...layout.heights)<=availableHeight)low=mid;else high=mid;
+      }
+      const layout=phonePngLayout(ctx,days,variant,low,candidate.columns,candidate.split);
+      if(!best||layout.font>best.font)best=layout;
+    }
+    const tableHeight=Math.max(...best.heights);
+    const blockHeight=headerHeight+tableHeight+FOOTER_H;
+    const blockTop=SAFE_TOP+(1920-SAFE_TOP-SAFE_BOTTOM-blockHeight)/2;
+    const captionY=blockTop+title.length*43+24;
+    const contentTop=blockTop+headerHeight;
+    ctx.fillStyle='#f9eff1';ctx.fillRect(0,0,1080,1920);
+    ctx.fillStyle='#91223a';ctx.font='600 38px "Google Sans","Be Vietnam Pro",Arial,sans-serif';
+    drawLines(ctx,title,40,blockTop+38,43);
+    ctx.fillStyle='#9c7681';ctx.font='500 20px "Google Sans","Be Vietnam Pro",Arial,sans-serif';
+    ctx.fillText('THỜI KHÓA BIỂU · '+variant.caption,40,captionY,1000);
+    const f=best.font;
+    best.stacks.forEach((stack,col)=>{
+      let y=contentTop;const x=40+col*(best.width+24);
+      // Preserve compact spacing instead of stretching sparse days.
+      const extra=0;
+      stack.forEach(day=>{
+        const palette=phoneDayPalette(day.day);
+        ctx.fillStyle=palette.background;roundRect(ctx,x,y,best.width,day.height+extra,20);
+        ctx.fillStyle=palette.accent;roundRect(ctx,x,y+18,5,Math.min(60,day.height-36),2);
+        ctx.textAlign='left';ctx.fillStyle=palette.accent;ctx.font=`700 ${f*.98}px "Google Sans","Be Vietnam Pro",Arial,sans-serif`;
+        const itemCount=day.groups.reduce((sum,g)=>sum+g.items.length,0);
+        const itemExtra=extra/Math.max(1,itemCount);
+        let ty=y+18;drawLines(ctx,day.heading,x+18,ty+f*.98,f*1.16);ty+=day.heading.length*f*1.16+f*.25;
+        day.groups.forEach(group=>{
+          ctx.fillStyle=palette.muted;ctx.font=`600 ${f*.70}px "Google Sans","Be Vietnam Pro",Arial,sans-serif`;
+          drawLines(ctx,group.label,x+18,ty+f*.7,f*.9);ty+=group.label.length*f*.9+f*.3;
+          group.items.forEach(item=>{
+            ctx.fillStyle=palette.accent;ctx.font=`600 ${f*.78}px "Google Sans","Be Vietnam Pro",Arial,sans-serif`;
+            ctx.fillText('T'+item.period,x+18,ty+f);
+            const tx=x+18+f*1.45;
+            ctx.fillStyle=palette.ink;ctx.font=`700 ${f}px "Google Sans","Be Vietnam Pro",Arial,sans-serif`;
+            drawLines(ctx,item.subject,tx,ty+f,f*1.16);
+            if(item.note.length){ctx.fillStyle=palette.accent;ctx.font=`600 ${f*.72}px "Google Sans","Be Vietnam Pro",Arial,sans-serif`;drawLines(ctx,item.note,x+best.width-18-item.noteWidth,ty+f,f*.9)}
+            ctx.fillStyle=palette.muted;ctx.font=`600 ${f*.82}px "Google Sans","Be Vietnam Pro",Arial,sans-serif`;
+            drawLines(ctx,item.meta,tx,ty+item.mainHeight+f*.85,f*.98);
+            ty+=item.height+itemExtra;
+          });
+        });y+=day.height+extra+14;
+      });
+    });
+    ctx.fillStyle='#9c7681';ctx.font='400 17px "Google Sans","Be Vietnam Pro",Arial,sans-serif';
+    ctx.fillText('NGUYỄN KHUYẾN · '+fmt(state.lastSync),40,contentTop+tableHeight+30,1000);
+    const blob=await new Promise(resolve=>c.toBlob(resolve,'image/png'));
+    if(!blob)throw new Error('PNG encoding failed');
+    downloadBlob(blob,`${safeName(v.title)}_${variant.fileSuffix}_Phone_9x16.png`);
+    action('Đã xuất nền điện thoại 9:16 · 1080 × 1920 · Lịch căn giữa · Chừa lề đầu và cuối');
+  }catch(error){console.error('PNG export failed',error);action('Không thể xuất PNG. Vui lòng thử lại')}
 }
 let scheduleDrag=null;
 document.addEventListener('pointerdown',e=>{
@@ -4144,5 +4247,11 @@ els.syncBtn.onclick=()=>syncLive();
 try{applyUiScale(localStorage.getItem('tkb-ui-scale')||'medium')}catch(_){applyUiScale('medium')}
 try{setMobileLite(localStorage.getItem('tkb-mobile-lite')==='1')}catch(_){setMobileLite(window.innerWidth<=560)}
 updateExportLabels();els.search.disabled=true;setDetailMode(window.innerWidth<=560?'simple':'full');updateEmptySearchPrompt();updateSearchClear();clearView();updateLive(true);syncLive({silent:true}).finally(()=>updateLive(false));setInterval(checkLiveVersion,LIVE_POLL_MS);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')checkLiveVersion()});window.addEventListener('focus',checkLiveVersion);window.addEventListener('resize',()=>{if(window.innerWidth<=560&&!state.mobileLite)setMobileLite(true)});
-</script>
-</body></html>
+
+
+document.getElementById('nkNavigation').appendChild(document.querySelector('.aurora-mode-row'));
+const navIcons={student:'◉',teacher:'▤',class:'▧',room:'▢',freeRoom:'▦',homeClass:'⌂'};
+document.querySelectorAll('.seg').forEach(b=>b.dataset.symbol=navIcons[b.dataset.mode]);
+document.querySelectorAll('[data-start]').forEach(b=>b.addEventListener('click',()=>{setMode(b.dataset.start);document.getElementById('search').scrollIntoView({behavior:'smooth',block:'center'});}));
+
+</script></body></html>
