@@ -2,6 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
+<meta name="nk-build" content="week9-github-stable-20261031">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="theme-color" content="#b62035">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +53,7 @@ button,input{font:inherit}.app{width:min(1460px,100%);margin:0 auto;padding:20px
 @media print{body{background:#fff}.topbar,.control,.action-line,.section-bar,.footer{display:none!important}.app{padding:0}.schedule-shell{box-shadow:none;border-radius:0}}
 </style>
 <!--
-  TKB GitHub Public-Read · 2 nguồn trực tiếp
+  TKB GitHub Public-Read · 6 nguồn trực tiếp
   - Frontend tĩnh, phù hợp GitHub Pages.
   - Đọc trực tiếp 2 Google Sheet public-read bằng Google Visualization JSONP.
   - Nguồn 1: toàn bộ buổi sáng. Nguồn 2: lịch lớp gốc Sáng/Chiều.
@@ -1747,7 +1748,7 @@ body .schedule-grid .lesson .count-badge{background:transparent!important;border
 .nk-brand small{font-size:12px!important;line-height:1.5!important;letter-spacing:0!important;text-transform:none!important;color:#78525c!important;max-width:100%;white-space:normal!important}
 </style>
 </head>
-<body><aside class="nk-sidebar"><div class="nk-brand"><div class="nk-mark">NK</div><div><b>Nguyễn Khuyến</b><small>Thời khóa biểu áp dụng từ tuần 9, ngày 2/11/2026.</small></div></div><div class="nk-nav-label">THỜI KHÓA BIỂU</div><div id="nkNavigation"></div><div class="nk-sidebar-foot"><strong>Mỗi ngày, một hành trình mới.</strong>Tra cứu lịch học và kết nối<br>với nhịp sống nhà trường.</div></aside>
+<body><noscript><p>Vui lòng bật JavaScript để tra cứu thời khóa biểu.</p></noscript><aside class="nk-sidebar"><div class="nk-brand"><div class="nk-mark">NK</div><div><b>Nguyễn Khuyến</b><small>Thời khóa biểu áp dụng từ tuần 9, ngày 2/11/2026.</small></div></div><div class="nk-nav-label">THỜI KHÓA BIỂU</div><div id="nkNavigation"></div><div class="nk-sidebar-foot"><strong>Mỗi ngày, một hành trình mới.</strong>Tra cứu lịch học và kết nối<br>với nhịp sống nhà trường.</div></aside>
 <div class="app">
   <header class="topbar aurora-topbar">
     <div class="brand">
@@ -1897,6 +1898,21 @@ body .schedule-grid .lesson .count-badge{background:transparent!important;border
   </section>
   <footer class="footer"><span>Thời khóa biểu · dữ liệu trực tiếp · Sáng / Chiều · GDTC đúng tiết · Phòng ưu tiên dữ liệu gốc</span><span id="footerTime"></span></footer>
 </div>
+<script>
+(function(){
+ function showIssue(message){
+  var box=document.getElementById('nkStartupIssue');
+  if(!box){box=document.createElement('div');box.id='nkStartupIssue';box.setAttribute('role','alert');box.style.cssText='margin:16px;padding:16px;border:1px solid #bc2944;border-radius:12px;background:#fff;color:#741b30;font:15px Arial,sans-serif;position:relative;z-index:100000';document.body.prepend(box)}
+  box.textContent=message+' ';
+  var button=document.createElement('button');button.textContent='Tải lại trang';button.style.cssText='padding:8px 12px;margin-left:8px;cursor:pointer';button.onclick=function(){location.reload()};box.appendChild(button);
+  var status=document.getElementById('liveText');if(status)status.textContent='Trang chưa khởi động được. Vui lòng tải lại.';
+ }
+ window.addEventListener('error',function(event){if(!window.__nkBootReady&&event.error){window.__nkBootError=event.message}});
+ document.addEventListener('DOMContentLoaded',function(){
+  if(!window.__nkBootReady)showIssue('Không khởi động được trang. Hãy tải lại hoặc kiểm tra file index.html đã tải lên GitHub.');
+ });
+})();
+</script>
 <script>
 const DAYS=[2,3,4,5,6],PERIODS=[1,2,3,4,5],HOME_PERIODS=PERIODS;
 // ===== 6 NGUỒN GOOGLE SHEET PUBLIC-READ =====
@@ -3170,6 +3186,12 @@ function loadDirectSheet(sheetId,gid,requiredHeader,sheetName=''){
 async function syncLive({silent=false,onlyIfChanged=false}={}){
   if(liveSyncInFlight||bulkRunning)return;
   liveSyncInFlight=true;
+  window.__nkDataPending=true;
+  let completed=0;
+  const report=promise=>promise.finally(()=>{
+    completed++;
+    if(!state.data)els.liveText.textContent=`Đang tải dữ liệu ${completed}/6 nguồn…`;
+  });
   if(!silent)updateLive(true);
   try{
     const [r10,r11,r12,rHome,rRoomMap,rElective12Room]=await Promise.allSettled([
@@ -3181,7 +3203,7 @@ async function syncLive({silent=false,onlyIfChanged=false}={}){
       loadDirectSheet(ELECTIVE12_ROOM_SHEET_ID,'','',ELECTIVE12_ROOM_SHEET_NAME).then(rows=>{
         parseElective12RoomMapRows(rows);return rows;
       })
-    ]);
+    ].map(report));
     // Không áp dụng kết quả đồng bộ nếu xuất hàng loạt đã bắt đầu trong lúc chờ tải.
     if(bulkRunning)return;
     const rows10=r10.status==='fulfilled'?r10.value:null,
@@ -3220,10 +3242,11 @@ async function syncLive({silent=false,onlyIfChanged=false}={}){
       clearView()
     }
     updateLive(false);
-    if(!silent)action('Không kết nối được dữ liệu trực tiếp')
+    action(state.data?'Chưa cập nhật được dữ liệu mới. Đang giữ bản đã tải.':'Không tải được dữ liệu. Kiểm tra kết nối Internet rồi bấm Cập nhật để thử lại.')
   }finally{
     liveSyncInFlight=false;
-    if(!silent)updateLive(false)
+    window.__nkDataPending=false;
+    updateLive(false)
   }
 }
 let lastAutoCheck=0;
@@ -3379,7 +3402,7 @@ function printableHtml(v){
   .r th{font-size:6.5pt;text-transform:uppercase}
   .r th:nth-child(1),.r td:nth-child(1){width:10mm;text-align:center}
   .r th:nth-child(3),.r td:nth-child(3){white-space:nowrap}
-  <\/style><\/head><body>${schedules}${roster}<script>
+  <\/style><\/head><body>${schedules}${roster}\x3cscript>
   window.onload=()=>{document.title=${JSON.stringify(fileTitle)};window.focus();setTimeout(()=>window.print(),260)}
   <\/script><\/body><\/html>`
 }
@@ -3498,7 +3521,7 @@ function waitFrame(){return new Promise(r=>requestAnimationFrame(()=>setTimeout(
 function downloadBlob(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200)}
 function noPrintHtml(v){
   const clone={...v,roster:[]};
-  return printableHtml(clone).replace(/<script>[\s\S]*?<\/script>/i,'')
+  return printableHtml(clone).replace(/\x3cscript>[\s\S]*?<\/script>/i,'')
 }
 async function timetablePdfBlob(v){
   const {jsPDF}=window.jspdf;
@@ -4036,9 +4059,11 @@ $('#pngBtn').onclick=()=>{els.exportMenu.classList.remove('open');exportPng()};
 els.syncBtn.onclick=()=>syncLive();
 try{applyUiScale(localStorage.getItem('tkb-ui-scale')||'medium')}catch(_){applyUiScale('medium')}
 try{setMobileLite(localStorage.getItem('tkb-mobile-lite')==='1')}catch(_){setMobileLite(window.innerWidth<=560)}
-updateExportLabels();els.search.disabled=true;setDetailMode(window.innerWidth<=560?'simple':'full');updateEmptySearchPrompt();updateSearchClear();clearView();updateLive(true);requestAnimationFrame(()=>{void restoreFastCache();void syncLive({silent:true}).finally(()=>updateLive(false))});setInterval(checkLiveVersion,LIVE_POLL_MS);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')checkLiveVersion()});window.addEventListener('focus',checkLiveVersion);window.addEventListener('resize',()=>{if(window.innerWidth<=560&&!state.mobileLite)setMobileLite(true)});
+updateExportLabels();els.search.disabled=true;setDetailMode(window.innerWidth<=560?'simple':'full');updateEmptySearchPrompt();updateSearchClear();clearView();updateLive(true);setTimeout(()=>{void restoreFastCache();void syncLive({silent:true}).finally(()=>updateLive(false))},0);setInterval(checkLiveVersion,LIVE_POLL_MS);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')checkLiveVersion()});window.addEventListener('focus',checkLiveVersion);window.addEventListener('resize',()=>{if(window.innerWidth<=560&&!state.mobileLite)setMobileLite(true)});
 document.getElementById('nkNavigation').appendChild(document.querySelector('.aurora-mode-row'));
 const navIcons={student:'◉',teacher:'▤',class:'▧',room:'▢',freeRoom:'▦',homeClass:'⌂'};
 document.querySelectorAll('.seg').forEach(b=>b.dataset.symbol=navIcons[b.dataset.mode]);
 document.querySelectorAll('[data-start]').forEach(b=>b.addEventListener('click',()=>{setMode(b.dataset.start);document.getElementById('search').scrollIntoView({behavior:'smooth',block:'center'});}));
+
+window.__nkBootReady=true;
 </script></body></html>
