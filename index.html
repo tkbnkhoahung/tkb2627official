@@ -53,7 +53,7 @@ button,input{font:inherit}.app{width:min(1460px,100%);margin:0 auto;padding:20px
 @media print{body{background:#fff}.topbar,.control,.action-line,.section-bar,.footer{display:none!important}.app{padding:0}.schedule-shell{box-shadow:none;border-radius:0}}
 </style>
 <!--
-  TKB GitHub Public-Read · 6 nguồn trực tiếp
+  TKB GitHub Public-Read · 2 nguồn trực tiếp
   - Frontend tĩnh, phù hợp GitHub Pages.
   - Đọc trực tiếp 2 Google Sheet public-read bằng Google Visualization JSONP.
   - Nguồn 1: toàn bộ buổi sáng. Nguồn 2: lịch lớp gốc Sáng/Chiều.
@@ -1920,26 +1920,12 @@ body .schedule-grid .lesson .count-badge{background:transparent!important;border
 </script>
 <script>
 const DAYS=[2,3,4,5,6],PERIODS=[1,2,3,4,5],HOME_PERIODS=PERIODS;
-// ===== 6 NGUỒN GOOGLE SHEET PUBLIC-READ =====
-// Nguồn 10 HKI 26-27: lịch học sinh lớp 10 (buổi sáng), gồm môn tự chọn, GDTC, CTNT, AVBN, MOS.
-const ELECTIVE10_SHEET_ID='1c9lY0pbOvj47IN3kE-lUtdvYFaWETsx6Fe0EcWUGAk4';
-const ELECTIVE10_SHEET_GID='0';
-// Nguồn lớp gốc: lịch chính khóa S/C.
+// Hai tệp dữ liệu: chính khóa giữ nguyên và bảng trái buổi mới.
 const HOME_SHEET_ID='132pTSUjCeHhahXr7O2m4K_Bmcj_AxCAjfawPwzyoOG8';
 const HOME_SHEET_GID='0';
-// Nguồn 11: lịch lớp 11; GDTC dùng thêm cột LỊCH THỂ DỤC để phân đúng Sáng/Chiều và tiết.
-const ELECTIVE11_SHEET_ID='1AZxauVY7l5FvF7SA3jOf3jzuROICEw6as_IB6oOfdvw';
-const ELECTIVE11_SHEET_GID='0';
-// Nguồn 12: TN1/TN2 chiều Thứ 2 + GDTC chiều Thứ 3/4 theo mapping trong Sheet.
-const ELECTIVE12_SHEET_ID='1LxkeTQ2e1oPmQWwqPlXm1aziaNhz74IeH7ks8WSJaiA';
-const ELECTIVE12_SHEET_GID='0'; // Parser v22 tách riêng khối GDTC và TN theo tên+lớp để chống lệch dòng.
-// Nguồn 5: fallback phòng học theo Lớp gốc × Buổi × Thứ.
-// QUY TẮC: phòng đã có trong 4 nguồn chính luôn được giữ nguyên. BÓNG RỔ/CẦU LÔNG không map phòng học; nếu trống -> SÂN TRƯỜNG.
-const ROOMMAP_SHEET_ID='10KmNYHCkKReBgv6TFslRi_FQAS9W7dk1bE8dqOZey-w';
-const ROOMMAP_SHEET_GID='0';
-// Nguồn 6: phòng tự chọn khối 12, khóa Mã lớp × Tiết (Chiều Thứ Hai).
-const ELECTIVE12_ROOM_SHEET_ID='1KBQS-uaYtjm_UzdhEIcZs36N4YVzK0liVd9B1stkpWM';
-const ELECTIVE12_ROOM_SHEET_NAME='Trang tính1';
+const NEW_SHEET_ID='1BVeHTPL2OTj_teyc-y_g56gRH1_YcEX9D-SUHDr6EN8';
+const NEW_MAPPING_GID='837962673';
+const NEW_TABS=['Khối 10','Khối 11','Khối 12','Mã môn 10','Mã môn 11','Mã môn 12'];
 const LIVE_POLL_MS=60000; // Hạn chế yêu cầu Google Sheets quá dày; vẫn cập nhật ngay bằng nút làm mới.
 let liveSyncInFlight=false;
 // =============================================
@@ -2419,17 +2405,50 @@ function aggregateElectiveForStudents(ids){
   return{morning,afternoon,codes,teachers,rooms,subjects,days,events}
 }
 function teacherDisplay(key){return state.data?.teacherNames?.get(key)||state.homeData?.teachers?.find(t=>t.key===key)?.name||key}
-function applyRows(rows10,rows11,rows12,homeRows,roomMapRows,updatedAt,version10,version11,version12,homeVersion,roomMapVersion,elective12RoomRows=null,elective12RoomMapVersion=null){
-  const roomMap=parseRoomMapRows(roomMapRows||[]);
-  const elective12RoomMap=parseElective12RoomMapRows(elective12RoomRows||[]);
-  state.roomMap=roomMap;
-  state.elective12RoomMap=elective12RoomMap;
-  state.data=parseRows(rows10||[],rows11||[],rows12||[],roomMap,elective12RoomMap);
-  state.homeData=homeRows?parseHomeRows(homeRows,roomMap):{byClass:new Map(),byTeacher:new Map(),byRoom:new Map(),teachers:[],rooms:[],classes:[],lessons:[],count:0};
-  setSourceAvailability([rows10,rows11,rows12,homeRows,roomMapRows,elective12RoomRows]);
-  state.lastSync=updatedAt?new Date(updatedAt):new Date();
-  state.version10=version10??state.version10;state.version11=version11??state.version11;state.version12=version12??state.version12;state.homeVersion=homeVersion??state.homeVersion;state.roomMapVersion=roomMapVersion??state.roomMapVersion;
-  state.elective12RoomMapVersion=elective12RoomMapVersion;
+function parseLinkedRows(tables){
+  const students=new Map();
+  const objects=rows=>{const heads=rows[0].map(clean);return rows.slice(1).map(r=>Object.fromEntries(heads.map((h,i)=>[h,clean(r[i])])))};
+  for(let g=0;g<3;g++){
+    const grade=10+g, catalog=new Map();
+    for(const r of objects(tables[g+3])){
+      if(!r['Mã liên kết môn'])continue;
+      const lessons=[];
+      const pattern=/(Sáng|Chiều)\s*T([2-6])\s*:\s*([0-9,\s–-]+)/gi;
+      for(const match of r['Lịch học (thứ, buổi, tiết)'].matchAll(pattern)){
+        const periods=new Set();
+        for(const token of match[3].split(',')){
+          const range=token.trim().match(/^(\d+)(?:\s*[-–]\s*(\d+))?$/);if(!range)continue;
+          for(let p=+range[1];p<=+(range[2]||range[1]);p++)if(HOME_PERIODS.includes(p))periods.add(p);
+        }
+        for(const period of periods)lessons.push({session:norm(match[1])==='sang'?'S':'C',day:+match[2],period,
+          subject:upperData(r['Môn học']),code:upperData(r['Mã lớp môn gốc']),teacher:upperData(r['Giáo viên']),room:upperData(r['Phòng']),
+          source:'elective',sourceKey:'g'+grade,sourceLabel:'LỚP '+grade});
+      }
+      if(!lessons.length)throw new Error('Lịch học không hợp lệ: '+r['Mã liên kết môn']);
+      catalog.set(r['Mã liên kết môn'],lessons);
+    }
+    for(const r of objects(tables[g])){
+      if(!r['Họ và tên'])continue;
+      const rawId=r['Mã học sinh'], id=grade+':'+(rawId||norm(r['Họ và tên'])+':'+r['Lớp']);
+      if(!students.has(id))students.set(id,{id,displayId:rawId,name:upperData(r['Họ và tên']),homeClass:upperData(r['Lớp']),grade,sourceKey:'g'+grade,sourceLabel:'LỚP '+grade,schedule:[]});
+      if(!r['Mã liên kết môn'])continue;
+      const lessons=catalog.get(r['Mã liên kết môn']);
+      if(!lessons)throw new Error('Không tìm thấy mã môn: '+r['Mã liên kết môn']);
+      const student=students.get(id);
+      for(const lesson of lessons)if(!student.schedule.some(l=>slotKey(l.session,l.day,l.period)===slotKey(lesson.session,lesson.day,lesson.period)&&l.code===lesson.code))student.schedule.push({...lesson});
+    }
+  }
+  return buildElectiveData([...students.values()]);
+}
+function applyRows(tables,homeRows,updatedAt,mappingRows){
+  // Parse both sources before replacing the current snapshot.
+  const roomMap=parseRoomMapRows(mappingRows);
+  const students=parseLinkedRows(tables).students;
+  applyRoomFallbackToStudents(students,roomMap);
+  const data=buildElectiveData(students),homeData=parseHomeRows(homeRows,roomMap);
+  state.data=data;state.homeData=homeData;state.roomMap=roomMap;state.elective12RoomMap=new Map();
+  state.sourceCount=2;state.unavailableSources=[];state.source='live';
+  state.lastSync=new Date(updatedAt);
   els.search.disabled=false;if(els.bulkExportBtn)els.bulkExportBtn.disabled=false;updateLive();if(state.selection&&!selectionExists(state.selection))clearSelection();else if(state.selection)renderView();renderSuggestionsIfOpen()
 }
 function freeRoomSlotKey(session,day,period){return`${session}-${day}-${period}`}
@@ -2778,14 +2797,14 @@ function selectionExists(sel){
 function setSourceAvailability(rows){
   state.sourceCount=rows.filter(Boolean).length;
   state.unavailableSources=rows.flatMap((r,i)=>r?[]:[i+1]);
-  state.source=state.sourceCount===6?'live':'partial';
+  state.source=state.sourceCount===2?'live':'partial';
 }
 function updateLive(syncing=false){
-  els.liveChip.classList.remove('wait','warn');if(syncing){els.liveChip.classList.add('wait');els.liveText.textContent='Đang đồng bộ 6 nguồn…';els.syncBtn.classList.add('spin');els.syncBtn.disabled=true;return}
+  els.liveChip.classList.remove('wait','warn');if(syncing){els.liveChip.classList.add('wait');els.liveText.textContent='Đang đồng bộ 2 nguồn…';els.syncBtn.classList.add('spin');els.syncBtn.disabled=true;return}
   els.syncBtn.classList.remove('spin');els.syncBtn.disabled=bulkRunning;
   if(state.source==='cached'){els.liveChip.classList.add('warn');els.liveText.textContent='Bản lưu · '+fmt(state.lastSync)+' · đang kiểm tra cập nhật';els.footerTime.textContent='Dữ liệu lưu lúc '+fmt(state.lastSync)}
-  else if(state.source==='live'&&state.lastSync){els.liveText.textContent=`6 nguồn trực tiếp · ${fmt(state.lastSync)}`;els.footerTime.textContent=`Cập nhật ${fmt(state.lastSync)}`}
-  else if(state.source==='partial'&&state.lastSync){els.liveChip.classList.add('warn');els.liveText.textContent=`${state.sourceCount}/6 nguồn trực tiếp · Nguồn ${state.unavailableSources.join(', ')} chưa sẵn sàng`;els.footerTime.textContent=`Cập nhật ${fmt(state.lastSync)}`}
+  else if(state.source==='live'&&state.lastSync){els.liveText.textContent=`2 nguồn trực tiếp · ${fmt(state.lastSync)}`;els.footerTime.textContent=`Cập nhật ${fmt(state.lastSync)}`}
+  else if(state.source==='partial'&&state.lastSync){els.liveChip.classList.add('warn');els.liveText.textContent=`${state.sourceCount}/2 nguồn trực tiếp · Nguồn ${state.unavailableSources.join(', ')} chưa sẵn sàng`;els.footerTime.textContent=`Cập nhật ${fmt(state.lastSync)}`}
   else{els.liveChip.classList.add('warn');els.liveText.textContent='Chưa kết nối dữ liệu trực tiếp';els.footerTime.textContent=''}
 }
 function options(){
@@ -3189,69 +3208,24 @@ function loadDirectSheet(sheetId,gid,requiredHeader,sheetName=''){
 }
 async function syncLive({silent=false,onlyIfChanged=false}={}){
   if(liveSyncInFlight||bulkRunning)return;
-  liveSyncInFlight=true;
-  window.__nkDataPending=true;
-  let completed=0;
-  const report=promise=>promise.finally(()=>{
-    completed++;
-    if(!state.data)els.liveText.textContent=`Đang tải dữ liệu ${completed}/6 nguồn…`;
-  });
-  if(!silent)updateLive(true);
+  liveSyncInFlight=true;window.__nkDataPending=true;if(!silent)updateLive(true);
   try{
-    const [r10,r11,r12,rHome,rRoomMap,rElective12Room]=await Promise.allSettled([
-      loadDirectSheet(ELECTIVE10_SHEET_ID,ELECTIVE10_SHEET_GID,'Student_ID'),
-      loadDirectSheet(ELECTIVE11_SHEET_ID,ELECTIVE11_SHEET_GID,'HoTen'),
-      loadDirectSheet(ELECTIVE12_SHEET_ID,ELECTIVE12_SHEET_GID,'HoTen'),
+    const results=await Promise.all([
+      ...NEW_TABS.map((name,i)=>loadDirectSheet(NEW_SHEET_ID,'',i<3?'Mã học sinh':'Mã liên kết môn',name)),
       loadDirectSheet(HOME_SHEET_ID,HOME_SHEET_GID,'Activity Id'),
-      loadDirectSheet(ROOMMAP_SHEET_ID,ROOMMAP_SHEET_GID,'Buổi sáng thứ hai'),
-      loadDirectSheet(ELECTIVE12_ROOM_SHEET_ID,'','',ELECTIVE12_ROOM_SHEET_NAME).then(rows=>{
-        parseElective12RoomMapRows(rows);return rows;
-      })
-    ].map(report));
-    // Không áp dụng kết quả đồng bộ nếu xuất hàng loạt đã bắt đầu trong lúc chờ tải.
+      loadDirectSheet(NEW_SHEET_ID,NEW_MAPPING_GID,'Buổi sáng thứ hai')
+    ]);
     if(bulkRunning)return;
-    const rows10=r10.status==='fulfilled'?r10.value:null,
-      rows11=r11.status==='fulfilled'?r11.value:null,
-      rows12=r12.status==='fulfilled'?r12.value:null,
-      homeRows=rHome.status==='fulfilled'?rHome.value:null,
-      roomMapRows=rRoomMap.status==='fulfilled'?rRoomMap.value:null,
-      elective12RoomRows=rElective12Room.status==='fulfilled'?rElective12Room.value:null;
-    if(!rows10&&!rows11&&!rows12)throw new Error('Không đọc được dữ liệu học sinh');
-    const v10=rows10?rowsFingerprint(rows10):null,
-      v11=rows11?rowsFingerprint(rows11):null,
-      v12=rows12?rowsFingerprint(rows12):null,
-      vh=homeRows?rowsFingerprint(homeRows):null,
-      vr=roomMapRows?rowsFingerprint(roomMapRows):null,
-      ve=elective12RoomRows?rowsFingerprint(elective12RoomRows):null,
-      checkedAt=new Date();
-    const changed=!onlyIfChanged||
-      state.version10!==v10||state.version11!==v11||state.version12!==v12||
-      state.homeVersion!==vh||state.roomMapVersion!==vr||state.elective12RoomMapVersion!==ve||!state.data;
-    if(changed){
-      applyRows(rows10,rows11,rows12,homeRows,roomMapRows,checkedAt.toISOString(),v10,v11,v12,vh,vr,elective12RoomRows,ve);saveFastCache([rows10,rows11,rows12,homeRows,roomMapRows,checkedAt.toISOString(),v10,v11,v12,vh,vr,elective12RoomRows,ve])
-    }else{
-      setSourceAvailability([rows10,rows11,rows12,homeRows,roomMapRows,elective12RoomRows]);
-      state.lastSync=checkedAt;updateLive(false)
-    }
-    if(!silent)action(
-      (rows10&&rows11&&rows12&&homeRows&&roomMapRows&&elective12RoomRows)
-        ?'Đã cập nhật 6 nguồn dữ liệu'
-        :'Đã cập nhật dữ liệu hiện có'
-    )
+    const tables=results.slice(0,6),home=results[6],mapping=results[7],version=results.map(rowsFingerprint).join('|'),now=new Date().toISOString();
+    if(!onlyIfChanged||state.linkedVersion!==version||!state.data){
+      applyRows(tables,home,now,mapping);state.linkedVersion=version;saveFastCache([tables,home,now,mapping]);
+    }else{state.lastSync=new Date(now);state.source='live';}
+    if(!silent)action('Đã cập nhật chính khóa và dữ liệu trái buổi mới');
   }catch(e){
-    if(!state.data){
-      state.source='error';
-      els.search.disabled=true;
-      if(els.bulkExportBtn)els.bulkExportBtn.disabled=true;
-      clearView()
-    }
-    updateLive(false);
-    action(state.data?'Chưa cập nhật được dữ liệu mới. Đang giữ bản đã tải.':'Không tải được dữ liệu. Kiểm tra kết nối Internet rồi bấm Cập nhật để thử lại.')
-  }finally{
-    liveSyncInFlight=false;
-    window.__nkDataPending=false;
-    updateLive(false)
-  }
+    if(!state.data){state.source='error';els.search.disabled=true;if(els.bulkExportBtn)els.bulkExportBtn.disabled=true;clearView()}
+    else state.source='cached';
+    action(state.data?'Chưa cập nhật được đầy đủ. Đang giữ bản đã tải.':'Không tải được dữ liệu: '+e.message);
+  }finally{liveSyncInFlight=false;window.__nkDataPending=false;updateLive(false)}
 }
 let lastAutoCheck=0;
 async function checkLiveVersion(){if(bulkRunning||liveSyncInFlight||document.visibilityState!=='visible'||Date.now()-lastAutoCheck<LIVE_POLL_MS)return;lastAutoCheck=Date.now();await syncLive({silent:true,onlyIfChanged:true})}
@@ -3282,7 +3256,7 @@ async function prepareExportLibraries(names){
  catch(error){action('Không tải được thư viện xuất file. Kiểm tra Internet rồi thử lại.');return false}
 }
 // Cache only complete snapshots. A failed cache never blocks live loading.
-const FAST_CACHE_KEY=[ELECTIVE10_SHEET_ID,ELECTIVE11_SHEET_ID,ELECTIVE12_SHEET_ID,HOME_SHEET_ID,ROOMMAP_SHEET_ID,ELECTIVE12_ROOM_SHEET_ID,'week9-v1'].join('|');
+const FAST_CACHE_KEY=[HOME_SHEET_ID,NEW_SHEET_ID,NEW_MAPPING_GID,'linked-mapping-v2'].join('|');
 function withTimetableCache(operation){
  return new Promise(resolve=>{
   let settled=false,db;
@@ -3297,12 +3271,12 @@ function withTimetableCache(operation){
  });
 }
 function saveFastCache(args){
- if(![args[0],args[1],args[2],args[3],args[4],args[11]].every(Boolean))return;
+ if(!args[0]||args[0].length!==6||!args[1]||!args[3])return;
  void withTimetableCache((db,done)=>{const tx=db.transaction('snapshots','readwrite');tx.objectStore('snapshots').put({args,savedAt:Date.now()},FAST_CACHE_KEY);tx.oncomplete=()=>done(true);tx.onerror=()=>done(null)});
 }
 async function restoreFastCache(){
  const entry=await withTimetableCache((db,done)=>{const req=db.transaction('snapshots').objectStore('snapshots').get(FAST_CACHE_KEY);req.onsuccess=()=>done(req.result);req.onerror=()=>done(null)});
- if(state.data||!entry||Date.now()-entry.savedAt>86400000||!Array.isArray(entry.args)||entry.args.length!==13)return;
+ if(state.data||!entry||Date.now()-entry.savedAt>86400000||!Array.isArray(entry.args)||entry.args.length!==4)return;
  try{applyRows(...entry.args);state.source='cached';updateLive(false)}catch{}
 }
 function safeName(s){return clean(s).replace(/[\\/:*?"<>|]/g,'_').slice(0,80)}function ensureView(){return state.selection?currentView():null}
