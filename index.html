@@ -1752,8 +1752,99 @@ body .schedule-grid .lesson .count-badge{background:transparent!important;border
   outline:3px solid #8192f2!important;outline-offset:3px!important
 }
 </style>
-</head>
-<body><noscript><p>Vui lòng bật JavaScript để tra cứu thời khóa biểu.</p></noscript><aside class="nk-sidebar"><div class="nk-brand"><div class="nk-mark">NK</div><div><b>Nguyễn Khuyến</b><small>Thời khóa biểu áp dụng từ tuần 9, ngày 2/11/2026.</small></div></div><div class="nk-nav-label">THỜI KHÓA BIỂU</div><div id="nkNavigation"></div><div class="nk-sidebar-foot"><strong>Mỗi ngày, một hành trình mới.</strong>Tra cứu lịch học và kết nối<br>với nhịp sống nhà trường.</div></aside>
+<style>
+#nowPanel{padding:24px;background:#fff;border:1px solid #e2e8f0;border-radius:20px;margin:20px 0}#nowPanel[hidden]{display:none!important}#nowPanel h2{margin-bottom:10px}.nowFilters{display:flex;flex-wrap:wrap;gap:14px;margin:20px 0;align-items:end}.nowFilters label{display:flex;flex-direction:column;gap:6px;font-size:13px}.nowFilters input,.nowFilters select,.nowFilters button{padding:11px;border:1px solid #cbd5e1;border-radius:9px;background:white;font:inherit;max-width:100%}.nowFilters button{background:#4338ca;color:white;cursor:pointer}.nowScroll{overflow:auto;margin-top:16px}.nowTable{width:100%;min-width:730px;border-collapse:collapse}.nowTable td,.nowTable th{padding:13px 10px;text-align:left;border-bottom:1px solid #e2e8f0;font-size:13px}.nowTable th{background:#eef2ff}.nowNote{font-size:12px;color:#64748b;margin-top:16px}#nowSummary{background:#eef2ff;padding:14px;border-radius:10px}body.now-view .searchbox,body.now-view #searchEmptyState,body.now-view #primaryScheduleShell,body.now-view #primarySectionBar,body.now-view #homeScheduleArea,body.now-view #viewHead,body.now-view #statsZone,body.now-view #roster,body.now-view #welcomeStrip,body.now-view #gridNote{display:none!important}@media(max-width:600px){#nowPanel{padding:14px}.nowFilters label{flex:1 1 130px}}
+</style><style id="nk-refined-design">
+/* Unified interface · Nguyễn Khuyến */
+:root{--bg:#f5f7fa;--card:#fff;--text:#192d43;--muted:#65778b;--line:#e2e8ef;--brand:#17665c;--brand-2:#115348;--brand-soft:#edf6f2;--shadow:0 12px 35px #19314407;--shadow-sm:0 3px 12px #19314404;--radius:18px}
+body{background:var(--bg)!important;color:var(--text)!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important;font-weight:400!important}
+body:before,body:after{display:none!important}
+button,input,select{font-family:inherit!important}button{transition:background .15s,border-color .15s,box-shadow .15s!important}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #268474!important;outline-offset:3px!important}
+button:disabled{cursor:not-allowed!important;opacity:.45!important}
+.nk-sidebar{position:relative!important;background:#fff!important;padding:22px max(24px,calc((100vw - 1380px)/2)) 0!important;border-bottom:1px solid var(--line)!important;box-shadow:none!important}
+.nk-brand{padding:0 0 20px!important;align-items:center!important;gap:12px!important}
+.nk-mark{height:42px!important;width:42px!important;border-radius:13px!important;background:var(--brand)!important;color:#fff!important;font-size:16px!important;font-weight:700!important;box-shadow:none!important;letter-spacing:-.5px!important}
+.nk-brand b{font-size:20px!important;color:var(--text)!important;letter-spacing:-.4px!important;font-weight:650!important}
+.nk-brand small{font-size:12px!important;color:var(--muted)!important;margin-top:5px!important}
+.nk-sidebar .aurora-mode-row{margin:0!important;border:0!important;padding:0!important}
+.nk-sidebar .segmented{gap:6px!important;padding:0 0 12px!important;background:transparent!important;border:0!important;flex-direction:row!important}
+.nk-sidebar .seg{min-height:42px!important;padding:10px 16px!important;border-radius:10px!important;color:#566a7d!important;font-size:13px!important;font-weight:550!important;background:transparent!important;border:0!important;box-shadow:none!important;gap:8px!important}
+.nk-sidebar .seg:before{display:none!important}.nk-sidebar .seg .nav-icon{width:17px;height:17px;flex:none;stroke-width:1.7}
+.nk-sidebar .seg:hover{background:#f3f6f8!important}.nk-sidebar .seg.active{background:#eaf4ef!important;color:#14594f!important;font-weight:650!important}
+.nk-sidebar .seg.active:after{display:none!important}
+.app{width:100%!important;max-width:1428px!important;margin:0 auto!important;padding:30px 24px 40px!important}
+.topbar{background:none!important;border:0!important;padding:0 0 24px!important;margin:0!important;box-shadow:none!important;align-items:center!important;gap:20px!important}
+.logo{background:#e8f1ed!important;color:#17665c!important;box-shadow:none!important;border:0!important;width:42px!important;height:42px!important;border-radius:12px!important}
+.brand-eyebrow{color:#65778b!important;letter-spacing:1.6px!important;font-size:10px!important;margin-bottom:7px!important}
+.brand h1{font-size:27px!important;font-weight:650!important;color:var(--text)!important;letter-spacing:-.8px!important}
+.brand p{color:var(--muted)!important;font-size:13px!important;display:block!important;margin-top:7px!important}
+.live-wrap{max-width:44%;gap:8px!important}.live-chip{border:1px solid #dce9e3!important;background:#f0f7f3!important;color:#306951!important;font-size:11px!important;font-weight:500!important;border-radius:9px!important;white-space:normal!important;line-height:1.5!important;max-width:none!important;box-shadow:none!important}
+.live-chip.wait{background:#f0f3f7!important;border-color:#e1e7ee!important;color:#64748b!important}.live-chip.warn{background:#fff7e8!important;border-color:#f1dfbb!important;color:#8a611a!important}
+.live-dot{box-shadow:none!important;flex:none!important}.icon-btn{background:white!important;color:#365a64!important;border-color:var(--line)!important;box-shadow:none!important;flex:none}
+.control.aurora-command{padding:20px!important;background:white!important;border:1px solid var(--line)!important;border-radius:16px!important;box-shadow:none!important;margin-bottom:20px!important;backdrop-filter:none!important}
+.aurora-tool-grid{gap:22px!important;align-items:start!important}
+.aurora-panel{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;border-radius:0!important}
+.panel-label b{color:#4c6176!important;font-size:10px!important;letter-spacing:1.1px!important;font-weight:650!important}.panel-label small{color:#788797!important;font-size:11px!important}
+.searchbox{background:#f7f9fb!important;border:1px solid #dce4eb!important;min-height:48px!important;border-radius:10px!important;box-shadow:none!important}
+.searchbox:focus-within{border-color:#3d8a7d!important;box-shadow:0 0 0 3px #17665c12!important}
+.searchbox input{font-size:14px!important;color:#233d51!important}.search-icon-bubble{background:none!important;color:#638179!important;box-shadow:none!important}
+.search-hint{background:#fff!important;border:1px solid #e0e7ed!important;color:#788799!important;border-radius:5px!important;font-size:10px!important}
+.detail-switch,.zoom-box{background:#f4f7f9!important;border:1px solid #e4eaf0!important;box-shadow:none!important;border-radius:8px!important;padding:3px!important}
+.detail-btn,.zoom-btn,.mobile-lite-btn{color:#617488!important;font-size:12px!important;border-radius:6px!important;box-shadow:none!important}
+.detail-btn.active{background:#fff!important;color:#165e53!important;box-shadow:0 1px 3px #18324710!important}
+.export-btn{background:#17665c!important;color:#fff!important;box-shadow:none!important;border-radius:9px!important;min-height:42px!important}
+.bulk-btn{background:#fff!important;color:#3c596b!important;border:1px solid #dce4eb!important;box-shadow:none!important;border-radius:9px!important;min-height:42px!important}
+.export-btn:hover{background:#115348!important}.bulk-btn:hover{background:#f5f8fa!important}
+.suggestions,.export-menu,.bulk-menu{border:1px solid var(--line)!important;border-radius:12px!important;box-shadow:0 12px 35px #162d421a!important;background:white!important}
+.option:hover,.option.active,.menu-item:hover{background:#edf5f1!important}.option b,.menu-item b{color:#233d51!important;font-size:13px!important}.option-tag,.menu-icon{background:#edf5f1!important;color:#17665c!important}
+.search-empty-state{background:#edf4f1!important;border:1px solid #dce8e2!important;border-radius:20px!important;box-shadow:none!important}
+.nk-hero{background:none!important;padding:42px 46px!important;min-height:280px!important;gap:40px!important;grid-template-columns:1.3fr 1fr!important}
+.nk-eyebrow{color:#4b7b6c!important;font-size:10px!important;letter-spacing:1.8px!important}.nk-eyebrow:before{background:#6b9e87!important}
+.nk-hero h2{color:#204b40!important;font-size:36px!important;font-weight:550!important;letter-spacing:-1.1px!important;line-height:1.25!important}
+.nk-hero p{color:#5d776e!important;font-size:14px!important;line-height:1.75!important;max-width:450px!important}
+.nk-hero-hint{color:#668178!important}.nk-hero-hint kbd{color:#486d61!important;background:#ffffff80!important;border-color:#d4e4dc!important}
+.nk-art{background:#ffffffb3!important;border:1px solid #d2e3d9!important;border-radius:14px!important;box-shadow:0 12px 28px #2153400a!important;transform:rotate(-2deg)!important;padding:20px!important;height:220px!important}
+.nk-art-top{color:#577366!important;border-bottom:1px solid #e1ebe5!important}.nk-art-grid i{background:#e6f0e9!important;border:0!important;border-radius:5px!important;height:29px!important}.nk-art-grid i:nth-child(3n){background:#f2ebdb!important}.nk-art-grid i:nth-child(5n){background:#e3eaf1!important}.nk-art-badge{background:white!important;color:#46725d!important;border:1px solid #dbe8df!important;box-shadow:0 4px 15px #1b462e08!important}
+.nk-guides{gap:14px!important;margin-top:18px!important}.nk-guide{padding:20px!important;border-radius:13px!important;border:1px solid var(--line)!important;background:#fff!important;color:#264554!important;box-shadow:none!important;transform:none!important}.nk-guide:hover{border-color:#9cbcb0!important;background:#fbfdfc!important}.nk-guide>span{background:#edf5f1!important;color:#32745c!important}.nk-guide b{font-size:13px!important;font-weight:600!important}.nk-guide small{font-size:12px!important;color:#718391!important}
+.view-title h2{color:var(--text)!important;font-size:25px!important;font-weight:650!important}.view-title p{font-size:12px!important;color:var(--muted)!important}
+.mode-badge,.session-badge{background:#edf5f1!important;color:#306d58!important;border:0!important}.session-badge.afternoon{background:#faf2e4!important;color:#967038!important}
+.welcome-strip{background:#f0f6f3!important;border:1px solid #dce8e2!important;border-radius:14px!important;box-shadow:none!important;padding:18px 22px!important}
+.welcome-strip:before{display:none!important}.welcome-message,.welcome-message strong{color:#285846!important;font-size:19px!important;font-weight:550!important}.welcome-eyebrow{color:#6b867a!important}.welcome-meta{color:#527362!important;background:white!important;border-color:#dbe6de!important}
+.stat{border:1px solid var(--line)!important;background:white!important;box-shadow:none!important;border-radius:12px!important;padding:17px!important}.stat-value{color:#214f43!important;font-size:27px!important;font-weight:600!important}.stat-label,.stat-note{color:#6a7e90!important}
+.section-bar h3{color:#233d51!important;font-size:15px!important}.section-bar p,.section-right{color:#718393!important;font-size:11px!important}
+.schedule-shell,.roster-card,.free-room-panel{border:1px solid var(--line)!important;border-radius:14px!important;box-shadow:none!important;background:white!important}
+.schedule-grid .ghead{background:#f1f5f6!important;color:#486274!important;padding:15px 10px!important;font-weight:600!important;font-size:12px!important}
+.schedule-grid .period{background:#f7f9fa!important;color:#6b7c89!important}.schedule-grid .slot{padding:8px!important;background:#fff!important;border-color:#e7edf0!important}.schedule-grid .slot.blank{background:#fafbfc!important}
+body .schedule-grid .lesson{border:1px solid #e1e8e5!important;border-left:3px solid var(--tone-accent,#648e7d)!important;border-radius:8px!important;padding:12px!important;background:#fcfefd!important}
+body .schedule-grid .lesson .subject,body .schedule-grid .lesson .simple-main{font-size:var(--lesson-title-size)!important;color:#284638!important;font-weight:650!important;line-height:1.45!important}
+body .schedule-grid .lesson .classcode{color:#657c71!important;font-size:var(--lesson-text-size)!important;font-weight:600!important;margin:7px 0!important}
+body .schedule-grid .lesson .meta-label{color:#7a8b82!important;font-weight:400!important}
+body .schedule-grid .lesson .meta-value,body .schedule-grid .lesson .simple-room{color:#3a5547!important;font-weight:500!important}
+body{--lesson-title-size:15px;--lesson-text-size:12px}
+.roster th,.nowTable th{background:#f2f6f5!important;color:#587064!important;font-size:11px!important;font-weight:600!important;letter-spacing:.3px!important}
+.roster td,.nowTable td{color:#324c42!important;border-color:#e8eeea!important;line-height:1.6!important}
+.roster tr:hover td,.nowTable tr:hover td{background:#f8fbf9!important}
+#nowPanel{background:white!important;border:1px solid var(--line)!important;padding:28px!important;border-radius:18px!important;margin:0!important}
+#nowPanel h2{color:#203b31!important;font-size:25px!important;font-weight:600!important;letter-spacing:-.6px!important;margin:0 0 10px!important}
+#nowPanel>p{color:#6e8278!important;font-size:13px!important;line-height:1.7!important}
+.nowFilters{display:grid!important;grid-template-columns:1fr .8fr .8fr 1.7fr auto!important;gap:14px!important;padding:20px!important;background:#f6f9f7!important;border:1px solid #e3ebe6!important;border-radius:12px!important;margin:24px 0 18px!important}
+.nowFilters label{color:#4d685b!important;font-size:12px!important;gap:8px!important;min-width:0}
+.nowFilters input,.nowFilters select{width:100%;min-width:0!important;padding:11px!important;background:white!important;border:1px solid #d5e2da!important;color:#284536!important;border-radius:8px!important;min-height:43px}
+.nowFilters button{border:0!important;background:#17665c!important;color:white!important;padding:12px 17px!important;border-radius:8px!important;min-height:43px;cursor:pointer}
+#nowSummary{background:#edf5f0!important;color:#32634b!important;border:1px solid #dbe9df!important;border-radius:9px!important;font-size:13px!important;line-height:1.7}
+.nowScroll{border:1px solid #e2eae4;border-radius:12px}.nowTable th{padding:15px 12px!important}.nowTable td{padding:15px 12px!important}.nowTable td:nth-child(3){font-weight:600}.nowTable tbody tr:last-child td{border-bottom:0}
+.nowNote{color:#7b8e81!important;font-size:12px!important}
+body.now-view .control,body.now-view .nk-guides{display:none!important}
+.free-room-panel{padding:22px!important}.rm-head{background:#eff5f2!important;color:#3b6553!important}.rm-toggle{border-radius:8px!important;box-shadow:none!important}.rm-toggle.free{background:#edf6ef!important;color:#38704e!important}.rm-toggle.used{background:#f5f1e9!important;color:#866637!important}
+.free-room-metric{background:#f7faf8!important;border-color:#e1e9e4!important;border-radius:10px!important}.free-room-metric b{color:#2b5a46!important}
+.footer{color:#8a98a1!important;font-size:11px!important;padding-top:15px!important}.action-line{font-size:12px!important;color:#597a68!important}
+@media(max-width:1050px){.nowFilters{grid-template-columns:1fr 1fr 1fr!important}.nowFilters label:last-of-type{grid-column:span 2}.aurora-tool-grid{flex-wrap:wrap!important}.search-panel{flex-basis:100%!important}}
+@media(max-width:700px){.nk-sidebar{padding:18px 16px 0!important}.nk-brand b{font-size:18px!important}.nk-brand small{font-size:11px!important}.nk-sidebar .segmented{gap:4px!important}.nk-sidebar .seg{padding:10px 12px!important;font-size:12px!important;flex-shrink:0!important}.app{padding:22px 16px 28px!important}.topbar{flex-direction:column;align-items:flex-start!important;gap:15px!important}.brand h1{font-size:24px!important}.live-wrap{max-width:100%;width:100%}.live-chip{font-size:11px!important}.control.aurora-command{padding:16px!important}.aurora-tool-grid{gap:18px!important}.nk-hero{padding:30px 24px!important;min-height:240px!important;grid-template-columns:1fr!important}.nk-hero h2{font-size:30px!important}.nk-art{display:none!important}.nk-guides{grid-template-columns:1fr!important}.nk-guide{display:flex!important;padding:17px!important}.nk-guide>span{margin:0!important}#nowPanel{padding:20px 14px!important}#nowPanel h2{font-size:22px!important}.nowFilters{grid-template-columns:1fr 1fr!important;padding:14px!important;gap:12px!important}.nowFilters label:last-of-type{grid-column:1/-1}.nowFilters button{grid-column:1/-1}.nowTable{min-width:680px!important}.view-title h2{font-size:22px!important}.welcome-message{font-size:17px!important}.schedule-grid{min-width:960px!important}.footer{flex-wrap:wrap!important;display:flex!important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*:before,*:after{animation:none!important;transition:none!important}}
+@media print{.nk-sidebar,.topbar,.control,.nk-guides,.nowFilters,.nowNote{display:none!important}.app{padding:0!important;max-width:none!important}#nowPanel{border:0!important;padding:0!important}.nowScroll{overflow:visible!important}.nowTable{min-width:0!important}body{background:#fff!important}}
+</style></head>
+<body><noscript><p>Vui lòng bật JavaScript để tra cứu thời khóa biểu.</p></noscript><aside class="nk-sidebar"><div class="nk-brand"><div class="nk-mark">NK</div><div><b>Nguyễn Khuyến</b><small>Cổng tra cứu thời khóa biểu · THPT Nguyễn Khuyến</small></div></div><div class="nk-nav-label">THỜI KHÓA BIỂU</div><div id="nkNavigation"></div><div class="nk-sidebar-foot"><strong>Mỗi ngày, một hành trình mới.</strong>Tra cứu lịch học và kết nối<br>với nhịp sống nhà trường.</div></aside>
 <div class="app">
   <header class="topbar aurora-topbar">
     <div class="brand">
@@ -1764,9 +1855,9 @@ body .schedule-grid .lesson .count-badge{background:transparent!important;border
         </svg>
       </div>
       <div class="brand-copy">
-        <span class="brand-eyebrow">SMART TIMETABLE</span>
-        <h1>Lịch học của bạn</h1>
-        <p>Mọi lịch học, trong một không gian.</p>
+        <span class="brand-eyebrow">KHÔNG GIAN HỌC TẬP</span>
+        <h1>Lịch học & giảng dạy</h1>
+        <p>Tra cứu lịch, tìm phòng và theo dõi từng tiết học.</p>
       </div>
     </div>
     <div class="live-wrap aurora-live-wrap">
@@ -1787,12 +1878,13 @@ body .schedule-grid .lesson .count-badge{background:transparent!important;border
         </div>
       </div>
       <div class="segmented aurora-segmented" role="tablist" aria-label="Chế độ xem">
-        <button class="seg active" data-mode="student"><span>Học sinh</span></button>
-        <button class="seg" data-mode="teacher"><span>Giáo viên</span></button>
-        <button class="seg" data-mode="class"><span>Lớp / mã</span></button>
-        <button class="seg" data-mode="room"><span>Phòng</span></button>
-        <button class="seg" data-mode="freeRoom"><span>Phòng trống</span></button>
-        <button class="seg" data-mode="homeClass"><span>Lớp gốc</span></button>
+        <button class="seg active" data-mode="student"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2 M16 6a4 4 0 1 1-8 0a4 4 0 0 1 8 0"/></svg><span>Học sinh</span></button>
+        <button class="seg" data-mode="teacher"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18v12H3z M8 20l4-4 4 4 M7 8h10 M7 12h6"/></svg><span>Giáo viên</span></button>
+        <button class="seg" data-mode="class"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3h16v18H4z M8 7h8 M8 11h8 M8 15h5"/></svg><span>Lớp / mã</span></button>
+        <button class="seg" data-mode="room"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V3h14v18 M3 21h18 M15 12h1"/></svg><span>Phòng</span></button>
+        <button class="seg" data-mode="freeRoom"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z M14 17l3 3 4-6"/></svg><span>Phòng trống</span></button>
+        <button class="seg" data-mode="now"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0 M12 6v6l4 2"/></svg><span>Hiện tại</span></button>
+        <button class="seg" data-mode="homeClass"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-7 9 7 M5 9v12h14V9 M9 21v-7h6v7"/></svg><span>Lớp gốc</span></button>
       </div>
     </div>
     <div class="aurora-tool-grid">
@@ -1881,7 +1973,21 @@ body .schedule-grid .lesson .count-badge{background:transparent!important;border
   </section>
   <div class="section-bar" id="primarySectionBar"><div><h3 id="primaryGridTitle">Thời khóa biểu</h3><p id="primaryGridSub">Hàng là tiết · cột là thứ · mỗi ô hiển thị đầy đủ thông tin lớp</p></div><div class="section-right" id="gridNote"></div></div>
   <section class="schedule-shell" id="primaryScheduleShell"><div class="schedule-grid" id="scheduleGrid"></div></section>
-  <section class="free-room-panel" id="freeRoomPanel" aria-live="polite">
+  <section id="nowPanel" hidden>
+<h2>Ai đang có lịch dạy?</h2>
+<p>Xem lịch theo ngày, buổi hoặc từng tiết. Đây là lịch được phân công, chưa xác nhận giáo viên đã có mặt.</p>
+<div class="nowFilters">
+<label>Ngày<input id="nowDate" type="date"></label>
+<label>Buổi<select id="nowSession"><option value="">Cả ngày</option><option value="S">Buổi sáng</option><option value="C">Buổi chiều</option></select></label>
+<label>Tiết<select id="nowPeriod"><option value="">Tất cả tiết</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label>
+<label>Tra cứu<input id="nowQuery" type="search" placeholder="Giáo viên, môn, lớp hoặc phòng"></label>
+<button id="nowToday" type="button">Hôm nay</button>
+</div>
+<p id="nowCaption"></p><div id="nowSummary" role="status"></div>
+<div class="nowScroll"><table class="nowTable"><thead><tr><th>Buổi</th><th>Tiết</th><th>Giáo viên</th><th>Môn dạy</th><th>Lớp / mã lớp</th><th>Phòng</th><th>Nguồn</th></tr></thead><tbody id="nowRows"></tbody></table></div>
+<p class="nowNote">Ngày được đối chiếu với thời khóa biểu tuần đang tải. Chưa có lịch nghỉ hoặc thay thế theo ngày. Chưa có giờ bắt đầu/kết thúc từng tiết nên hãy chọn tiết cần xem.</p>
+</section>
+<section class="free-room-panel" id="freeRoomPanel" aria-live="polite">
     <div class="free-room-summary">
       <div>
         <div class="free-room-kicker">THỐNG KÊ PHÒNG HỌC TOÀN TRƯỜNG</div>
@@ -2644,7 +2750,7 @@ function applyUnifiedRows(tables,updatedAt,versions){
  if(els.bulkExportBtn)els.bulkExportBtn.disabled=false;
  if(state.selection&&!selectionExists(state.selection))clearSelection();
  else if(state.selection)renderView();
- updateLive(false);renderSuggestionsIfOpen();
+ updateLive(false);renderSuggestionsIfOpen();if(state.mode==='now'){els.search.disabled=true;renderNow();}
 }
 // ===============================================
 function applyRows(rows10,rows11,rows12,homeRows,roomMapRows,updatedAt,version10,version11,version12,homeVersion,roomMapVersion,elective12RoomRows=null,elective12RoomMapVersion=null){
@@ -3184,8 +3290,13 @@ function updateExportLabels(){
   }
 }
 function setMode(mode){
+ const headings={student:'Lịch học của bạn',teacher:'Lịch giảng dạy',class:'Tra cứu lớp môn',room:'Lịch sử dụng phòng',freeRoom:'Tìm phòng trống',now:'Theo dõi lịch hiện tại',homeClass:'Thời khóa biểu lớp gốc'};
+ document.querySelector('.brand h1').textContent=headings[mode]||'Lịch học & giảng dạy';
+ document.body.classList.toggle('now-view',mode==='now');
+ $('#nowPanel').hidden=mode!=='now';
   hideFreeRoomView();hideSchoolStats();state.mode=mode;state.selection=null;els.search.value='';els.search.placeholder=placeholder();
   updateSearchClear();updateEmptySearchPrompt();updateExportLabels();$$('.seg').forEach(b=>{const active=b.dataset.mode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',active?'true':'false')});closeSuggestions();
+  if(mode==='now'){clearView();els.search.disabled=true;renderNow();return}
   if(mode==='freeRoom'){
     els.search.disabled=true;
     state.selection='overview';
@@ -3373,6 +3484,7 @@ function renderRoster(v){
   if(!v.roster.length){els.roster.classList.remove('show');return}els.rosterTitle.textContent=state.mode==='homeClass'?`Danh sách học sinh ${v.title}`:state.mode==='class'?`Danh sách học sinh ${v.title}`:state.mode==='room'?`Học sinh có lịch tại ${v.title}`:'Học sinh liên quan';els.rosterMeta.textContent=`${v.roster.length} học sinh`;els.rosterBody.innerHTML=v.roster.map((s,i)=>`<tr><td>${i+1}</td><td><b>${esc(s.name)}</b></td><td>${esc(s.homeClass)}</td></tr>`).join('');els.roster.classList.add('show')
 }
 function renderView(){
+ if(state.mode==='now'){renderNow();return}
   const v=currentView();if(!v)return clearView();
   els.viewTitle.textContent=v.title;els.viewSub.textContent=v.sub;
   els.modeBadge.textContent=state.mode==='freeRoom'?v.badge:`${v.badge} · ${state.detailMode==='simple'?'Đơn giản':'Đầy đủ'}`;
@@ -4202,6 +4314,44 @@ els.freeRoomGrid?.addEventListener('click',e=>{
     cell.classList.toggle('has-open',anyOpen)
   }
 });
+
+function nowToday(){
+ const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Ho_Chi_Minh',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+ const get=t=>parts.find(p=>p.type===t).value;
+ $('#nowDate').value=get('year')+'-'+get('month')+'-'+get('day');
+}
+function nowEvents(){
+ const events=new Map();
+ function add(l,source){
+  const identity=[source,l.session,l.day,l.period,norm(l.code||l.homeClass),norm(l.subject),norm(l.teacher),norm(l.room)].join('|');
+  if(!events.has(identity))events.set(identity,{...l,sourceLabel:source});
+ }
+ for(const student of state.data?.students||[])for(const lesson of student.schedule||[])add(lesson,'Tự chọn');
+ for(const lesson of state.homeData?.lessons||[])add(lesson,'Chính khóa');
+ return [...events.values()];
+}
+function nowFilteredEvents(day,session,period,query){
+ const q=norm(query);
+ return nowEvents().filter(l=>l.day===day&&(!session||l.session===session)&&(!period||l.period===Number(period))&&
+ (!q||norm([l.teacher,l.subject,l.code,l.homeClass,l.room].join(' ')).includes(q)))
+ .sort((a,b)=>(a.session==='S'?0:1)-(b.session==='S'?0:1)||a.period-b.period||clean(a.teacher).localeCompare(clean(b.teacher),'vi')||clean(a.code).localeCompare(clean(b.code),'vi',{numeric:true}));
+}
+function renderNow(){
+ const date=$('#nowDate').value;
+ const day=date?new Date(date+'T12:00:00+07:00').getUTCDay()+1:0;
+ const session=$('#nowSession').value,period=$('#nowPeriod').value;
+ const events=nowFilteredEvents(day,session,period,$('#nowQuery').value);
+ const ready=!!state.data;
+ const teacherKnown=t=>clean(t)&&!/(chua|giao vien|cho phan)/.test(norm(t));
+ const teachers=new Set(events.filter(l=>teacherKnown(l.teacher)).map(l=>norm(l.teacher)));
+ const unresolved=events.filter(l=>!teacherKnown(l.teacher)).length;
+ $('#nowCaption').textContent=date?(day===1?'Chủ nhật':'Thứ '+day)+' · '+date.split('-').reverse().join('/')+' · '+(session==='S'?'Buổi sáng':session==='C'?'Buổi chiều':'Cả ngày')+(period?' · Tiết '+period:' · Tất cả tiết'):'Chọn ngày để xem lịch';
+ $('#nowSummary').textContent=ready?events.length+' lượt lớp có lịch · '+teachers.size+' giáo viên đã ghi tên'+(unresolved?' · '+unresolved+' lượt chưa rõ giáo viên':'')+(state.source==='cached'?' · Đang dùng dữ liệu lưu':''):'Đang chờ dữ liệu thời khóa biểu. Nhấn nút cập nhật để thử lại.';
+ $('#nowRows').innerHTML=events.map(l=>'<tr><td>'+(l.session==='S'?'Sáng':'Chiều')+'</td><td>'+l.period+'</td><td>'+esc(l.teacher||'Chưa phân công')+'</td><td>'+esc(l.subject||'Chưa có môn')+'</td><td>'+esc(l.code||l.homeClass||'Chưa có lớp')+'</td><td>'+esc(l.room||'Chưa phân phòng')+'</td><td>'+esc(l.sourceLabel)+'</td></tr>').join('')||'<tr><td colspan="7">'+(!ready?'Chưa tải được dữ liệu.':!date?'Vui lòng chọn ngày.':!DAYS.includes(day)?'Nguồn hiện tại chỉ hiển thị lịch từ thứ 2 đến thứ 6.':'Không có lịch phù hợp với bộ lọc.')+'</td></tr>';
+}
+nowToday();
+for(const id of ['nowDate','nowSession','nowPeriod','nowQuery'])$('#'+id).addEventListener('input',renderNow);
+$('#nowToday').addEventListener('click',()=>{nowToday();$('#nowSession').value='';$('#nowPeriod').value='';$('#nowQuery').value='';renderNow()});
 $$('.seg').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
 $$('.detail-btn').forEach(b=>b.addEventListener('click',()=>setDetailMode(b.dataset.detail)));
 els.zoomOutBtn?.addEventListener('click',()=>changeUiScale(-1));
